@@ -1,0 +1,37 @@
+# Delta Live Tables Pipeline: Bronze to Silver (Simplified)
+# Transforms raw data into validated, cleaned silver layer
+
+resources:
+  pipelines:
+    insurance_dlt_bronze_to_silver:
+      name: insurance_${var.env}_bronze_to_silver_pipeline
+      
+      catalog: ${var.catalog_prefix}_silver
+      target: ${var.catalog_prefix}_silver
+      
+      libraries:
+        - notebook:
+            path: ../../src/pipelines/bronze_to_silver_customers.py
+        - notebook:
+            path: ../../src/pipelines/bronze_to_silver_policies.py
+        - notebook:
+            path: ../../src/pipelines/bronze_to_silver_claims.py
+        - notebook:
+            path: ../../src/pipelines/bronze_to_silver_agents.py
+        - notebook:
+            path: ../../src/pipelines/bronze_to_silver_payments.py
+      
+      configuration:
+        bronze_catalog: ${var.catalog_prefix}_bronze
+        silver_catalog: ${var.catalog_prefix}_silver
+        pipeline.environment: ${var.env}
+      
+      serverless: true
+      
+      continuous: false
+      
+      channel: CURRENT
+      
+      development: true
+
+

@@ -1,0 +1,81 @@
+# Gold Layer Schemas
+# Business-ready analytics and aggregations
+
+resources:
+  schemas:
+    # Customer Analytics Schema
+    gold_customer_analytics:
+      name: customer_analytics
+      catalog_name: ${var.catalog_prefix}_gold
+      comment: "Customer 360 views, lifetime value, segmentation, churn prediction"
+      properties:
+        business_area: "customer_intelligence"
+        refresh_frequency: "daily"
+        
+    # Policy Analytics Schema
+    gold_policy_analytics:
+      name: policy_analytics
+      catalog_name: ${var.catalog_prefix}_gold
+      comment: "Policy performance, retention, renewal analytics"
+      properties:
+        business_area: "product_analytics"
+        refresh_frequency: "daily"
+        
+    # Claims Analytics Schema
+    gold_claims_analytics:
+      name: claims_analytics
+      catalog_name: ${var.catalog_prefix}_gold
+      comment: "Claims analytics, fraud detection, loss ratios, severity trends"
+      properties:
+        business_area: "claims_intelligence"
+        refresh_frequency: "hourly"
+        fraud_detection: "enabled"
+        
+    # Financial Analytics Schema
+    gold_financial_analytics:
+      name: financial_analytics
+      catalog_name: ${var.catalog_prefix}_gold
+      comment: "Premium revenue, loss ratios, profitability, reserving analytics"
+      properties:
+        business_area: "finance"
+        refresh_frequency: "daily"
+        financial_data: "true"
+        
+    # Agent Performance Schema
+    gold_agent_analytics:
+      name: agent_analytics
+      catalog_name: ${var.catalog_prefix}_gold
+      comment: "Agent performance, sales metrics, commission analytics"
+      properties:
+        business_area: "sales_operations"
+        refresh_frequency: "daily"
+        
+    # Risk Analytics Schema
+    gold_risk_analytics:
+      name: risk_analytics
+      catalog_name: ${var.catalog_prefix}_gold
+      comment: "Risk assessment, loss forecasting, catastrophe modeling"
+      properties:
+        business_area: "actuarial"
+        refresh_frequency: "weekly"
+        
+    # Regulatory Reporting Schema
+    gold_regulatory_reporting:
+      name: regulatory_reporting
+      catalog_name: ${var.catalog_prefix}_gold
+      comment: "State-mandated reports, compliance metrics, audit trails"
+      properties:
+        business_area: "compliance"
+        refresh_frequency: "monthly"
+        audit_required: "true"
+        
+    # Executive Dashboards Schema
+    gold_executive_dashboards:
+      name: executive_dashboards
+      catalog_name: ${var.catalog_prefix}_gold
+      comment: "Executive KPIs, company-wide metrics, strategic insights"
+      properties:
+        business_area: "executive"
+        refresh_frequency: "daily"
+        access_level: "executive_only"
+

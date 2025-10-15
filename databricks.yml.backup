@@ -1,0 +1,137 @@
+# Databricks Asset Bundle Configuration
+# Enterprise Insurance Analytics Platform with Unity Catalog
+bundle:
+  name: insurance-analytics-platform
+  
+variables:
+  # Environment-specific variables
+  env:
+    description: "Environment (dev, staging, prod)"
+    default: dev
+  
+  catalog_prefix:
+    description: "Catalog name prefix"
+    default: insurance
+  
+  workspace_url:
+    description: "Databricks workspace URL"
+  
+  # Service Principal for automation
+  service_principal_id:
+    description: "Service principal application ID for job execution"
+  
+  # Data location
+  storage_location:
+    description: "Root storage location for Unity Catalog"
+    default: "s3://insurance-analytics-data"
+  
+  # Cluster configuration
+  cluster_node_type:
+    description: "Node type for compute clusters"
+    default: "i3.xlarge"
+  
+  min_workers:
+    description: "Minimum workers for autoscaling"
+    default: 2
+  
+  max_workers:
+    description: "Maximum workers for autoscaling"
+    default: 10
+
+# Include resource definitions
+include:
+  - resources/schemas/*.yml
+  - resources/jobs/*.yml
+  - resources/pipelines/*.yml
+
+targets:
+  # Development Environment
+  dev:
+    mode: development
+    default: true
+    workspace:
+      host: ${var.workspace_url}
+    
+    variables:
+      env: dev
+      catalog_prefix: insurance_dev
+      min_workers: 1
+      max_workers: 2
+    
+    resources:
+      jobs:
+        # Override job settings for dev
+        insurance_etl_*:
+          schedule:
+            pause_status: PAUSED
+          
+      pipelines:
+        # Override pipeline settings for dev
+        insurance_dlt_*:
+          development: true
+  
+  # Staging Environment
+  staging:
+    mode: development
+    workspace:
+      host: ${var.workspace_url}
+    
+    variables:
+      env: staging
+      catalog_prefix: insurance_staging
+      min_workers: 2
+      max_workers: 5
+    
+    resources:
+      jobs:
+        insurance_etl_*:
+          schedule:
+            pause_status: PAUSED
+  
+  # Production Environment
+  prod:
+    mode: production
+    workspace:
+      host: ${var.workspace_url}
+      root_path: /Workspace/.bundle/${bundle.name}/${bundle.target}
+    
+    variables:
+      env: prod
+      catalog_prefix: insurance_prod
+      cluster_node_type: "i3.2xlarge"
+      min_workers: 2
+      max_workers: 10
+    
+    # Production runs as service principal
+    run_as:
+      service_principal_name: ${var.service_principal_id}
+    
+    resources:
+      jobs:
+        insurance_etl_*:
+          schedule:
+            pause_status: UNPAUSED
+          max_retries: 2
+          timeout_seconds: 7200
+          
+      pipelines:
+        insurance_dlt_*:
+          development: false
+          continuous: false
+
+# Artifacts to sync
+artifacts:
+  notebooks:
+    path: ./src
+    
+  setup_scripts:
+    path: ./src/setup
+
+# Permissions
+permissions:
+  - level: CAN_MANAGE
+    group_name: insurance_platform_admins
+  
+  - level: CAN_VIEW
+    group_name: insurance_platform_users
+

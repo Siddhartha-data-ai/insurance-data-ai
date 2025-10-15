@@ -1,0 +1,139 @@
+# Security Grants and Access Control
+# Row-Level Security (RLS) and Column-Level Security (CLS)
+
+resources:
+  grants:
+    # ==========================================
+    # CATALOG LEVEL GRANTS
+    # ==========================================
+    
+    # Bronze Catalog - Data Engineers
+    bronze_catalog_data_engineers:
+      catalog: ${var.catalog_prefix}_bronze
+      principal: data_engineers
+      privileges:
+        - USE_CATALOG
+        - USE_SCHEMA
+        - CREATE_SCHEMA
+        - SELECT
+        - MODIFY
+        
+    # Silver Catalog - Data Engineers
+    silver_catalog_data_engineers:
+      catalog: ${var.catalog_prefix}_silver
+      principal: data_engineers
+      privileges:
+        - USE_CATALOG
+        - USE_SCHEMA
+        - CREATE_SCHEMA
+        - SELECT
+        - MODIFY
+        - CREATE_TABLE
+        
+    # Gold Catalog - Analytics Team
+    gold_catalog_analysts:
+      catalog: ${var.catalog_prefix}_gold
+      principal: business_analysts
+      privileges:
+        - USE_CATALOG
+        - USE_SCHEMA
+        - SELECT
+        
+    # Gold Catalog - Data Scientists
+    gold_catalog_data_scientists:
+      catalog: ${var.catalog_prefix}_gold
+      principal: data_scientists
+      privileges:
+        - USE_CATALOG
+        - USE_SCHEMA
+        - SELECT
+        - CREATE_TABLE
+        
+    # ==========================================
+    # SCHEMA LEVEL GRANTS
+    # ==========================================
+    
+    # Claims Schema - Claims Adjusters (Limited Access)
+    claims_schema_adjusters:
+      schema: claims
+      catalog: ${var.catalog_prefix}_silver
+      principal: claims_adjusters
+      privileges:
+        - USE_SCHEMA
+        - SELECT
+        
+    # Claims Schema - Claims Managers
+    claims_schema_managers:
+      schema: claims
+      catalog: ${var.catalog_prefix}_silver
+      principal: claims_managers
+      privileges:
+        - USE_SCHEMA
+        - SELECT
+        - MODIFY
+        
+    # Financial Schema - Finance Team Only
+    financial_schema_finance:
+      schema: financial_analytics
+      catalog: ${var.catalog_prefix}_gold
+      principal: finance_team
+      privileges:
+        - USE_SCHEMA
+        - SELECT
+        
+    # Agent Schema - Sales Team
+    agent_schema_sales:
+      schema: agents
+      catalog: ${var.catalog_prefix}_silver
+      principal: sales_team
+      privileges:
+        - USE_SCHEMA
+        - SELECT
+        
+    # ==========================================
+    # TABLE LEVEL GRANTS WITH RLS
+    # ==========================================
+    
+    # Regional Agents - See only their region's data
+    customers_table_regional_agents:
+      table: customers
+      schema: customers
+      catalog: ${var.catalog_prefix}_silver
+      principal: regional_agents
+      privileges:
+        - SELECT
+      # RLS will be applied via view/function
+      
+    # Claims Adjusters - See only assigned claims
+    claims_table_adjusters:
+      table: claims
+      schema: claims
+      catalog: ${var.catalog_prefix}_silver
+      principal: claims_adjusters
+      privileges:
+        - SELECT
+      # RLS will be applied via view/function
+      
+    # ==========================================
+    # VOLUME GRANTS
+    # ==========================================
+    
+    # Claim Documents - Claims Team
+    claim_documents_volume_claims_team:
+      volume: claim_documents_processed
+      schema: claims
+      catalog: ${var.catalog_prefix}_silver
+      principal: claims_team
+      privileges:
+        - READ_VOLUME
+        - WRITE_VOLUME
+        
+    # Policy Documents - Underwriters
+    policy_documents_volume_underwriters:
+      volume: policy_documents
+      schema: policies
+      catalog: ${var.catalog_prefix}_bronze
+      principal: underwriters
+      privileges:
+        - READ_VOLUME
+

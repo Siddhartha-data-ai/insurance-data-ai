@@ -1,0 +1,91 @@
+# Silver Layer Schemas
+# Cleaned, validated, and conformed data
+
+resources:
+  schemas:
+    # Customer Data Schema
+    silver_customers:
+      name: customers
+      catalog_name: ${var.catalog_prefix}_silver
+      comment: "Cleaned and validated customer data with SCD Type 2 history"
+      properties:
+        data_quality: "validated"
+        scd_type: "type_2"
+        pii_data: "true"
+        masking_enabled: "true"
+        
+    # Policy Data Schema
+    silver_policies:
+      name: policies
+      catalog_name: ${var.catalog_prefix}_silver
+      comment: "Validated policy data with business rules applied"
+      properties:
+        data_quality: "validated"
+        business_rules_applied: "true"
+        
+    # Claims Data Schema
+    silver_claims:
+      name: claims
+      catalog_name: ${var.catalog_prefix}_silver
+      comment: "Validated claims data with enrichments and status tracking"
+      properties:
+        data_quality: "validated"
+        enrichment: "provider_network,policy_details"
+        sensitive_data: "true"
+        
+    # Agent Data Schema
+    silver_agents:
+      name: agents
+      catalog_name: ${var.catalog_prefix}_silver
+      comment: "Validated agent data with hierarchy and territory mappings"
+      properties:
+        data_quality: "validated"
+        hierarchy_enabled: "true"
+        
+    # Payments Data Schema
+    silver_payments:
+      name: payments
+      catalog_name: ${var.catalog_prefix}_silver
+      comment: "Validated payment transactions with reconciliation"
+      properties:
+        data_quality: "validated"
+        reconciliation: "enabled"
+        financial_data: "true"
+        
+    # Underwriting Data Schema
+    silver_underwriting:
+      name: underwriting
+      catalog_name: ${var.catalog_prefix}_silver
+      comment: "Validated underwriting data with risk scores calculated"
+      properties:
+        data_quality: "validated"
+        risk_calculation: "enabled"
+        
+    # Provider Network Schema
+    silver_providers:
+      name: providers
+      catalog_name: ${var.catalog_prefix}_silver
+      comment: "Validated provider network with ratings and performance metrics"
+      properties:
+        data_quality: "validated"
+        performance_metrics: "enabled"
+        
+    # Master Data Schema
+    silver_master_data:
+      name: master_data
+      catalog_name: ${var.catalog_prefix}_silver
+      comment: "Master data and reference tables (states, products, coverage types)"
+      properties:
+        data_type: "master_data"
+        golden_records: "true"
+
+  volumes:
+    # Volume for processed claim documents
+    silver_claim_documents:
+      name: claim_documents_processed
+      catalog_name: ${var.catalog_prefix}_silver
+      schema_name: claims
+      volume_type: EXTERNAL
+      comment: "Processed and validated claim documents"
+      storage_location: "${var.storage_location}/${var.env}/volumes/claim_documents_processed"
+

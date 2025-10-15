@@ -1,0 +1,37 @@
+{
+  "_comment": "Configuration template for Databricks Asset Bundle deployment",
+  "_instructions": "Copy this file to dev.json, staging.json, or prod.json and fill in your values",
+  
+  "workspace_url": "https://your-workspace-url.cloud.databricks.com",
+  "catalog_prefix": "insurance_dev",
+  "storage_location": "s3://your-bucket-name/insurance-analytics",
+  
+  "cluster_settings": {
+    "cluster_node_type": "i3.xlarge",
+    "min_workers": 2,
+    "max_workers": 10,
+    "spark_version": "13.3.x-scala2.12"
+  },
+  
+  "service_principal": {
+    "application_id": "00000000-0000-0000-0000-000000000000",
+    "comment": "Service principal for production job execution"
+  },
+  
+  "sql_warehouse": {
+    "warehouse_id": "your-sql-warehouse-id",
+    "comment": "SQL warehouse for running SQL tasks"
+  },
+  
+  "notification_emails": {
+    "on_success": ["data-engineering@your-company.com"],
+    "on_failure": ["data-engineering@your-company.com", "data-engineering-oncall@your-company.com"]
+  },
+  
+  "tags": {
+    "project": "insurance-analytics",
+    "cost_center": "data-engineering",
+    "environment": "dev"
+  }
+}
+

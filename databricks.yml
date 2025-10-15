@@ -1,0 +1,31 @@
+# Databricks Asset Bundle Configuration - Simplified for Quick Start
+# Enterprise Insurance Analytics Platform with Unity Catalog
+
+bundle:
+  name: insurance-analytics-platform
+  
+variables:
+  # Environment-specific variables
+  env:
+    description: "Environment (dev, staging, prod)"
+    default: dev
+  
+  catalog_prefix:
+    description: "Catalog name prefix"
+    default: insurance
+
+# Include resource definitions
+include:
+  - resources/pipelines/bronze_to_silver_dlt_simplified.yml
+
+targets:
+  # Development Environment
+  dev:
+    mode: development
+    default: true
+    
+    variables:
+      env: dev
+      catalog_prefix: insurance_dev
+
+

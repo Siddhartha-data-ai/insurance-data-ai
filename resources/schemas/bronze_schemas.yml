@@ -1,0 +1,90 @@
+# Bronze Layer Schemas
+# Raw data from source systems
+
+resources:
+  schemas:
+    # Customer Data Schema
+    bronze_customers:
+      name: customers
+      catalog_name: ${var.catalog_prefix}_bronze
+      comment: "Raw customer and policyholder data from CRM system"
+      properties:
+        source_system: "salesforce_crm"
+        ingestion_frequency: "daily"
+        pii_data: "true"
+        
+    # Policy Data Schema
+    bronze_policies:
+      name: policies
+      catalog_name: ${var.catalog_prefix}_bronze
+      comment: "Raw policy data from policy administration system"
+      properties:
+        source_system: "policy_admin_system"
+        ingestion_frequency: "hourly"
+        
+    # Claims Data Schema
+    bronze_claims:
+      name: claims
+      catalog_name: ${var.catalog_prefix}_bronze
+      comment: "Raw claims data from claims management system"
+      properties:
+        source_system: "claims_management_system"
+        ingestion_frequency: "real_time"
+        sensitive_data: "true"
+        
+    # Agent Data Schema
+    bronze_agents:
+      name: agents
+      catalog_name: ${var.catalog_prefix}_bronze
+      comment: "Raw agent and broker data from agent management system"
+      properties:
+        source_system: "agent_portal"
+        ingestion_frequency: "daily"
+        
+    # Payments Data Schema
+    bronze_payments:
+      name: payments
+      catalog_name: ${var.catalog_prefix}_bronze
+      comment: "Raw payment and transaction data from payment gateway"
+      properties:
+        source_system: "payment_gateway"
+        ingestion_frequency: "real_time"
+        financial_data: "true"
+        
+    # Underwriting Data Schema
+    bronze_underwriting:
+      name: underwriting
+      catalog_name: ${var.catalog_prefix}_bronze
+      comment: "Raw underwriting and risk assessment data"
+      properties:
+        source_system: "underwriting_system"
+        ingestion_frequency: "daily"
+        
+    # Provider Network Schema
+    bronze_providers:
+      name: providers
+      catalog_name: ${var.catalog_prefix}_bronze
+      comment: "Raw provider network data (repair shops, hospitals, etc.)"
+      properties:
+        source_system: "provider_network_system"
+        ingestion_frequency: "weekly"
+
+  volumes:
+    # Volume for claim documents and images
+    bronze_claim_documents:
+      name: claim_documents
+      catalog_name: ${var.catalog_prefix}_bronze
+      schema_name: claims
+      volume_type: EXTERNAL
+      comment: "Raw claim documents, photos, police reports, medical records"
+      storage_location: "${var.storage_location}/${var.env}/volumes/claim_documents"
+      
+    # Volume for policy documents
+    bronze_policy_documents:
+      name: policy_documents
+      catalog_name: ${var.catalog_prefix}_bronze
+      schema_name: policies
+      volume_type: EXTERNAL
+      comment: "Raw policy documents, contracts, endorsements"
+      storage_location: "${var.storage_location}/${var.env}/volumes/policy_documents"
+

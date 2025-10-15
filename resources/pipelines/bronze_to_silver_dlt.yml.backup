@@ -1,0 +1,60 @@
+# Delta Live Tables Pipeline: Bronze to Silver
+# Transforms raw data into validated, cleaned silver layer
+
+resources:
+  pipelines:
+    insurance_dlt_bronze_to_silver:
+      name: insurance_${var.env}_bronze_to_silver_pipeline
+      
+      target: ${var.catalog_prefix}_silver
+      
+      libraries:
+        - notebook:
+            path: ../src/pipelines/bronze_to_silver_customers.py
+        - notebook:
+            path: ../src/pipelines/bronze_to_silver_policies.py
+        - notebook:
+            path: ../src/pipelines/bronze_to_silver_claims.py
+        - notebook:
+            path: ../src/pipelines/bronze_to_silver_agents.py
+        - notebook:
+            path: ../src/pipelines/bronze_to_silver_payments.py
+      
+      configuration:
+        bronze_catalog: ${var.catalog_prefix}_bronze
+        silver_catalog: ${var.catalog_prefix}_silver
+        pipeline.environment: ${var.env}
+      
+      clusters:
+        - label: default
+          autoscale:
+            min_workers: ${var.min_workers}
+            max_workers: ${var.max_workers}
+          node_type_id: ${var.cluster_node_type}
+          spark_conf:
+            spark.databricks.delta.optimizeWrite.enabled: "true"
+            spark.databricks.delta.autoCompact.enabled: "true"
+          aws_attributes:
+            availability: SPOT_WITH_FALLBACK
+      
+      continuous: false
+      
+      channel: CURRENT
+      
+      edition: ADVANCED
+      
+      photon: true
+      
+      storage: ${var.storage_location}/${var.env}/pipelines/bronze_to_silver
+      
+      notifications:
+        - email_recipients:
+            - data-engineering@insurance-company.com
+          on_failure: true
+      
+      permissions:
+        - level: CAN_VIEW
+          group_name: data_engineers
+        - level: CAN_MANAGE
+          group_name: insurance_platform_admins
+

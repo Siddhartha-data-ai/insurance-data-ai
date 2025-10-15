@@ -1,0 +1,35 @@
+# Unity Catalog Structure Definition
+# Catalogs for Medallion Architecture
+
+resources:
+  catalogs:
+    # Bronze Layer Catalog - Raw Data
+    insurance_bronze:
+      name: ${var.catalog_prefix}_bronze
+      comment: "Bronze layer - Raw insurance data from source systems"
+      properties:
+        data_classification: "raw"
+        domain: "insurance"
+        owner_team: "data_engineering"
+      storage_root: "${var.storage_location}/${var.env}/bronze"
+      
+    # Silver Layer Catalog - Cleaned and Conformed Data
+    insurance_silver:
+      name: ${var.catalog_prefix}_silver
+      comment: "Silver layer - Cleaned and validated insurance data"
+      properties:
+        data_classification: "curated"
+        domain: "insurance"
+        owner_team: "data_engineering"
+      storage_root: "${var.storage_location}/${var.env}/silver"
+    
+    # Gold Layer Catalog - Business-Ready Analytics
+    insurance_gold:
+      name: ${var.catalog_prefix}_gold
+      comment: "Gold layer - Business-ready insurance analytics and aggregations"
+      properties:
+        data_classification: "business"
+        domain: "insurance"
+        owner_team: "analytics"
+      storage_root: "${var.storage_location}/${var.env}/gold"
+
