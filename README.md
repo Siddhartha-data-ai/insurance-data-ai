@@ -13,6 +13,7 @@ Enterprise-grade insurance analytics platform built with Databricks Asset Bundle
 - **📊 Real Enterprise Data**: 1M+ customers, 2.5M+ policies, 375K+ claims with realistic distributions
 - **🤖 9 Production ML Models**: Churn prediction, fraud detection, claims forecasting, premium optimization (MLflow integrated)
 - **💬 AI Chatbot**: Streamlit-powered NLP chatbot for natural language analytics queries
+- **📊 Production Dashboards**: Data quality monitoring dashboard + cost optimization analysis with automated recommendations
 - **⚡ Delta Live Tables**: 5 DLT notebooks with native SCD Type 2, streaming ETL, and data quality checks
 - **🎯 Business Analytics**: Customer 360, fraud detection, policy performance, agent scorecards
 - **📈 Multi-Environment**: Dev, Staging, Production configurations with Databricks Asset Bundles
@@ -37,6 +38,8 @@ This end-to-end solution combines robust data engineering with advanced analytic
 insurance-data-ai/
 ├── databricks.yml                          # Main DABs configuration
 ├── README.md                               # This file
+├── DASHBOARDS_DEPLOYMENT_GUIDE.md          # ✨ Dashboard deployment guide
+├── launch_dq_dashboard.sh                  # ✨ Launch data quality dashboard
 ├── .gitignore                              
 │
 ├── config/                                 # Environment configurations
@@ -98,10 +101,13 @@ insurance-data-ai/
     │   └── requirements.txt               # Python dependencies
     │
     └── analytics/                          # Reporting and validation
-        ├── data_quality_monitoring.py
-        ├── data_quality_validation.py
-        ├── pipeline_completion_report.py
-        └── pipeline_monitoring_dashboard.py
+        ├── dq_dashboard.py                # ✨ Data Quality Dashboard (Streamlit)
+        ├── cost_optimization_analysis.py  # ✨ Cost Optimization Analysis
+        ├── data_quality_monitoring.py     # Data quality checks
+        ├── data_quality_validation.py     # Data validation rules
+        ├── pipeline_completion_report.py  # Pipeline reporting
+        ├── pipeline_monitoring_dashboard.py # Pipeline monitoring
+        └── requirements_dashboard.txt     # Dashboard dependencies
 ```
 
 ---
@@ -883,14 +889,21 @@ This project demonstrates:
 ### Issues
 Report issues or request features through your organization's channels.
 
-### Enhancements
+### Production Dashboards ✨
+
+**Now Included:**
+- ✅ **Data Quality Monitoring Dashboard** - Interactive Streamlit app with real-time quality metrics, alerts, and recommendations
+- ✅ **Cost Optimization Analysis** - Comprehensive cost tracking for storage, compute, and jobs with automated savings recommendations
+
+**See:** `DASHBOARDS_DEPLOYMENT_GUIDE.md` for deployment instructions
+
+### Future Enhancements
+
 This project can be extended with:
 - Real-time streaming ingestion
 - Advanced ML models (XGBoost, Deep Learning)
 - Integration with BI tools (Power BI, Tableau)
 - API layer for applications
-- Data quality monitoring dashboard
-- Cost optimization analysis
 
 ---
 

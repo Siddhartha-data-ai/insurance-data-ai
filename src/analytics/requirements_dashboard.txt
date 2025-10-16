@@ -1,0 +1,16 @@
+# Data Quality Monitoring Dashboard Requirements
+# Install with: pip install -r requirements_dashboard.txt
+
+# Core dependencies
+streamlit>=1.28.0
+plotly>=5.17.0
+altair>=5.1.0
+pandas>=2.0.0
+
+# Database connectivity
+pyspark>=3.4.0
+
+# Additional utilities
+requests>=2.31.0
+python-dateutil>=2.8.2
+
