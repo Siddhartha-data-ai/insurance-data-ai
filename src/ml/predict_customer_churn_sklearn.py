@@ -185,8 +185,8 @@ numeric_cols_to_convert = df_pandas.select_dtypes(include=["object"]).columns
 for col_name in numeric_cols_to_convert:
     try:
         df_pandas[col_name] = pd.to_numeric(df_pandas[col_name], errors="coerce")
-    except:
-        pass
+    except (ValueError, TypeError) as e:
+        print(f"Warning: Could not convert column {col_name} to numeric: {e}")
 
 df_pandas = df_pandas.fillna(0)
 

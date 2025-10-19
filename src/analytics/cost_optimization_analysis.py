@@ -164,7 +164,7 @@ def get_cluster_usage(days=30):
 
         # Get all clusters
         clusters_url = f"{api_url}/api/2.0/clusters/list"
-        response = requests.get(clusters_url, headers=headers)
+        response = requests.get(clusters_url, headers=headers, timeout=30)
         clusters = response.json().get("clusters", [])
 
         cluster_costs = []
@@ -175,7 +175,7 @@ def get_cluster_usage(days=30):
             # Get cluster events to calculate usage
             events_url = f"{api_url}/api/2.0/clusters/events"
             params = {"cluster_id": cluster_id, "limit": 100}
-            events_response = requests.post(events_url, headers=headers, json=params)
+            events_response = requests.post(events_url, headers=headers, json=params, timeout=30)
             events = events_response.json().get("events", [])
 
             # Calculate uptime from events
@@ -245,7 +245,7 @@ def get_job_performance(days=30):
         # Get recent job runs
         runs_url = f"{api_url}/api/2.1/jobs/runs/list"
         params = {"limit": 100, "expand_tasks": False}
-        response = requests.get(runs_url, headers=headers, params=params)
+        response = requests.get(runs_url, headers=headers, params=params, timeout=30)
         runs = response.json().get("runs", [])
 
         job_performance = []

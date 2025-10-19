@@ -47,7 +47,7 @@ notebook_path = os.path.dirname(dbutils.notebook.entry_point.getDbutils().notebo
 sys.path.insert(0, notebook_path)
 
 # Launch the chatbot
-exec(open("insurance_chatbot.py").read())
+exec(open("insurance_chatbot.py").read())  # nosec B102 - Safe: Databricks notebook launcher with hardcoded path
 
 # COMMAND ----------
 # MAGIC %md

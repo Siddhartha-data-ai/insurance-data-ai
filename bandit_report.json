@@ -1,0 +1,1263 @@
+{
+  "errors": [],
+  "generated_at": "2025-10-19T16:04:43Z",
+  "metrics": {
+    "_totals": {
+      "CONFIDENCE.HIGH": 3,
+      "CONFIDENCE.LOW": 25,
+      "CONFIDENCE.MEDIUM": 2,
+      "CONFIDENCE.UNDEFINED": 0,
+      "SEVERITY.HIGH": 0,
+      "SEVERITY.LOW": 2,
+      "SEVERITY.MEDIUM": 28,
+      "SEVERITY.UNDEFINED": 0,
+      "loc": 8792,
+      "nosec": 0,
+      "skipped_tests": 0
+    },
+    "src/analytics/cost_optimization_analysis.py": {
+      "CONFIDENCE.HIGH": 0,
+      "CONFIDENCE.LOW": 3,
+      "CONFIDENCE.MEDIUM": 0,
+      "CONFIDENCE.UNDEFINED": 0,
+      "SEVERITY.HIGH": 0,
+      "SEVERITY.LOW": 0,
+      "SEVERITY.MEDIUM": 3,
+      "SEVERITY.UNDEFINED": 0,
+      "loc": 453,
+      "nosec": 0,
+      "skipped_tests": 0
+    },
+    "src/analytics/data_quality_monitoring.py": {
+      "CONFIDENCE.HIGH": 0,
+      "CONFIDENCE.LOW": 0,
+      "CONFIDENCE.MEDIUM": 0,
+      "CONFIDENCE.UNDEFINED": 0,
+      "SEVERITY.HIGH": 0,
+      "SEVERITY.LOW": 0,
+      "SEVERITY.MEDIUM": 0,
+      "SEVERITY.UNDEFINED": 0,
+      "loc": 711,
+      "nosec": 0,
+      "skipped_tests": 0
+    },
+    "src/analytics/data_quality_validation.py": {
+      "CONFIDENCE.HIGH": 0,
+      "CONFIDENCE.LOW": 3,
+      "CONFIDENCE.MEDIUM": 0,
+      "CONFIDENCE.UNDEFINED": 0,
+      "SEVERITY.HIGH": 0,
+      "SEVERITY.LOW": 0,
+      "SEVERITY.MEDIUM": 3,
+      "SEVERITY.UNDEFINED": 0,
+      "loc": 99,
+      "nosec": 0,
+      "skipped_tests": 0
+    },
+    "src/analytics/dq_dashboard.py": {
+      "CONFIDENCE.HIGH": 0,
+      "CONFIDENCE.LOW": 0,
+      "CONFIDENCE.MEDIUM": 2,
+      "CONFIDENCE.UNDEFINED": 0,
+      "SEVERITY.HIGH": 0,
+      "SEVERITY.LOW": 0,
+      "SEVERITY.MEDIUM": 2,
+      "SEVERITY.UNDEFINED": 0,
+      "loc": 393,
+      "nosec": 0,
+      "skipped_tests": 0
+    },
+    "src/analytics/pipeline_completion_report.py": {
+      "CONFIDENCE.HIGH": 0,
+      "CONFIDENCE.LOW": 0,
+      "CONFIDENCE.MEDIUM": 0,
+      "CONFIDENCE.UNDEFINED": 0,
+      "SEVERITY.HIGH": 0,
+      "SEVERITY.LOW": 0,
+      "SEVERITY.MEDIUM": 0,
+      "SEVERITY.UNDEFINED": 0,
+      "loc": 116,
+      "nosec": 0,
+      "skipped_tests": 0
+    },
+    "src/analytics/pipeline_monitoring_dashboard.py": {
+      "CONFIDENCE.HIGH": 0,
+      "CONFIDENCE.LOW": 3,
+      "CONFIDENCE.MEDIUM": 0,
+      "CONFIDENCE.UNDEFINED": 0,
+      "SEVERITY.HIGH": 0,
+      "SEVERITY.LOW": 0,
+      "SEVERITY.MEDIUM": 3,
+      "SEVERITY.UNDEFINED": 0,
+      "loc": 433,
+      "nosec": 0,
+      "skipped_tests": 0
+    },
+    "src/bronze/generate_claims_data.py": {
+      "CONFIDENCE.HIGH": 0,
+      "CONFIDENCE.LOW": 1,
+      "CONFIDENCE.MEDIUM": 0,
+      "CONFIDENCE.UNDEFINED": 0,
+      "SEVERITY.HIGH": 0,
+      "SEVERITY.LOW": 0,
+      "SEVERITY.MEDIUM": 1,
+      "SEVERITY.UNDEFINED": 0,
+      "loc": 233,
+      "nosec": 0,
+      "skipped_tests": 0
+    },
+    "src/bronze/generate_customers_data.py": {
+      "CONFIDENCE.HIGH": 0,
+      "CONFIDENCE.LOW": 3,
+      "CONFIDENCE.MEDIUM": 0,
+      "CONFIDENCE.UNDEFINED": 0,
+      "SEVERITY.HIGH": 0,
+      "SEVERITY.LOW": 0,
+      "SEVERITY.MEDIUM": 3,
+      "SEVERITY.UNDEFINED": 0,
+      "loc": 483,
+      "nosec": 0,
+      "skipped_tests": 0
+    },
+    "src/bronze/generate_policies_data.py": {
+      "CONFIDENCE.HIGH": 0,
+      "CONFIDENCE.LOW": 2,
+      "CONFIDENCE.MEDIUM": 0,
+      "CONFIDENCE.UNDEFINED": 0,
+      "SEVERITY.HIGH": 0,
+      "SEVERITY.LOW": 0,
+      "SEVERITY.MEDIUM": 2,
+      "SEVERITY.UNDEFINED": 0,
+      "loc": 424,
+      "nosec": 0,
+      "skipped_tests": 0
+    },
+    "src/chatbot/insurance_chatbot.py": {
+      "CONFIDENCE.HIGH": 0,
+      "CONFIDENCE.LOW": 2,
+      "CONFIDENCE.MEDIUM": 0,
+      "CONFIDENCE.UNDEFINED": 0,
+      "SEVERITY.HIGH": 0,
+      "SEVERITY.LOW": 0,
+      "SEVERITY.MEDIUM": 2,
+      "SEVERITY.UNDEFINED": 0,
+      "loc": 508,
+      "nosec": 0,
+      "skipped_tests": 0
+    },
+    "src/chatbot/insurance_chatbot_native.py": {
+      "CONFIDENCE.HIGH": 0,
+      "CONFIDENCE.LOW": 6,
+      "CONFIDENCE.MEDIUM": 0,
+      "CONFIDENCE.UNDEFINED": 0,
+      "SEVERITY.HIGH": 0,
+      "SEVERITY.LOW": 0,
+      "SEVERITY.MEDIUM": 6,
+      "SEVERITY.UNDEFINED": 0,
+      "loc": 589,
+      "nosec": 0,
+      "skipped_tests": 0
+    },
+    "src/chatbot/launch_chatbot.py": {
+      "CONFIDENCE.HIGH": 1,
+      "CONFIDENCE.LOW": 0,
+      "CONFIDENCE.MEDIUM": 0,
+      "CONFIDENCE.UNDEFINED": 0,
+      "SEVERITY.HIGH": 0,
+      "SEVERITY.LOW": 0,
+      "SEVERITY.MEDIUM": 1,
+      "SEVERITY.UNDEFINED": 0,
+      "loc": 12,
+      "nosec": 0,
+      "skipped_tests": 0
+    },
+    "src/gold/build_customer_360.py": {
+      "CONFIDENCE.HIGH": 0,
+      "CONFIDENCE.LOW": 1,
+      "CONFIDENCE.MEDIUM": 0,
+      "CONFIDENCE.UNDEFINED": 0,
+      "SEVERITY.HIGH": 0,
+      "SEVERITY.LOW": 0,
+      "SEVERITY.MEDIUM": 1,
+      "SEVERITY.UNDEFINED": 0,
+      "loc": 251,
+      "nosec": 0,
+      "skipped_tests": 0
+    },
+    "src/gold/build_fraud_detection.py": {
+      "CONFIDENCE.HIGH": 0,
+      "CONFIDENCE.LOW": 1,
+      "CONFIDENCE.MEDIUM": 0,
+      "CONFIDENCE.UNDEFINED": 0,
+      "SEVERITY.HIGH": 0,
+      "SEVERITY.LOW": 0,
+      "SEVERITY.MEDIUM": 1,
+      "SEVERITY.UNDEFINED": 0,
+      "loc": 273,
+      "nosec": 0,
+      "skipped_tests": 0
+    },
+    "src/ml/check_prerequisites.py": {
+      "CONFIDENCE.HIGH": 0,
+      "CONFIDENCE.LOW": 0,
+      "CONFIDENCE.MEDIUM": 0,
+      "CONFIDENCE.UNDEFINED": 0,
+      "SEVERITY.HIGH": 0,
+      "SEVERITY.LOW": 0,
+      "SEVERITY.MEDIUM": 0,
+      "SEVERITY.UNDEFINED": 0,
+      "loc": 93,
+      "nosec": 0,
+      "skipped_tests": 0
+    },
+    "src/ml/forecast_claims.py": {
+      "CONFIDENCE.HIGH": 0,
+      "CONFIDENCE.LOW": 0,
+      "CONFIDENCE.MEDIUM": 0,
+      "CONFIDENCE.UNDEFINED": 0,
+      "SEVERITY.HIGH": 0,
+      "SEVERITY.LOW": 0,
+      "SEVERITY.MEDIUM": 0,
+      "SEVERITY.UNDEFINED": 0,
+      "loc": 209,
+      "nosec": 0,
+      "skipped_tests": 0
+    },
+    "src/ml/optimize_premiums.py": {
+      "CONFIDENCE.HIGH": 0,
+      "CONFIDENCE.LOW": 0,
+      "CONFIDENCE.MEDIUM": 0,
+      "CONFIDENCE.UNDEFINED": 0,
+      "SEVERITY.HIGH": 0,
+      "SEVERITY.LOW": 0,
+      "SEVERITY.MEDIUM": 0,
+      "SEVERITY.UNDEFINED": 0,
+      "loc": 299,
+      "nosec": 0,
+      "skipped_tests": 0
+    },
+    "src/ml/optimize_premiums_sklearn.py": {
+      "CONFIDENCE.HIGH": 0,
+      "CONFIDENCE.LOW": 0,
+      "CONFIDENCE.MEDIUM": 0,
+      "CONFIDENCE.UNDEFINED": 0,
+      "SEVERITY.HIGH": 0,
+      "SEVERITY.LOW": 0,
+      "SEVERITY.MEDIUM": 0,
+      "SEVERITY.UNDEFINED": 0,
+      "loc": 312,
+      "nosec": 0,
+      "skipped_tests": 0
+    },
+    "src/ml/predict_customer_churn.py": {
+      "CONFIDENCE.HIGH": 0,
+      "CONFIDENCE.LOW": 0,
+      "CONFIDENCE.MEDIUM": 0,
+      "CONFIDENCE.UNDEFINED": 0,
+      "SEVERITY.HIGH": 0,
+      "SEVERITY.LOW": 0,
+      "SEVERITY.MEDIUM": 0,
+      "SEVERITY.UNDEFINED": 0,
+      "loc": 257,
+      "nosec": 0,
+      "skipped_tests": 0
+    },
+    "src/ml/predict_customer_churn_sklearn.py": {
+      "CONFIDENCE.HIGH": 1,
+      "CONFIDENCE.LOW": 0,
+      "CONFIDENCE.MEDIUM": 0,
+      "CONFIDENCE.UNDEFINED": 0,
+      "SEVERITY.HIGH": 0,
+      "SEVERITY.LOW": 1,
+      "SEVERITY.MEDIUM": 0,
+      "SEVERITY.UNDEFINED": 0,
+      "loc": 252,
+      "nosec": 0,
+      "skipped_tests": 0
+    },
+    "src/ml/predict_fraud_enhanced.py": {
+      "CONFIDENCE.HIGH": 0,
+      "CONFIDENCE.LOW": 0,
+      "CONFIDENCE.MEDIUM": 0,
+      "CONFIDENCE.UNDEFINED": 0,
+      "SEVERITY.HIGH": 0,
+      "SEVERITY.LOW": 0,
+      "SEVERITY.MEDIUM": 0,
+      "SEVERITY.UNDEFINED": 0,
+      "loc": 242,
+      "nosec": 0,
+      "skipped_tests": 0
+    },
+    "src/ml/predict_fraud_enhanced_sklearn.py": {
+      "CONFIDENCE.HIGH": 1,
+      "CONFIDENCE.LOW": 0,
+      "CONFIDENCE.MEDIUM": 0,
+      "CONFIDENCE.UNDEFINED": 0,
+      "SEVERITY.HIGH": 0,
+      "SEVERITY.LOW": 1,
+      "SEVERITY.MEDIUM": 0,
+      "SEVERITY.UNDEFINED": 0,
+      "loc": 310,
+      "nosec": 0,
+      "skipped_tests": 0
+    },
+    "src/ml/run_all_predictions.py": {
+      "CONFIDENCE.HIGH": 0,
+      "CONFIDENCE.LOW": 0,
+      "CONFIDENCE.MEDIUM": 0,
+      "CONFIDENCE.UNDEFINED": 0,
+      "SEVERITY.HIGH": 0,
+      "SEVERITY.LOW": 0,
+      "SEVERITY.MEDIUM": 0,
+      "SEVERITY.UNDEFINED": 0,
+      "loc": 265,
+      "nosec": 0,
+      "skipped_tests": 0
+    },
+    "src/pipelines/bronze_to_silver_agents.py": {
+      "CONFIDENCE.HIGH": 0,
+      "CONFIDENCE.LOW": 0,
+      "CONFIDENCE.MEDIUM": 0,
+      "CONFIDENCE.UNDEFINED": 0,
+      "SEVERITY.HIGH": 0,
+      "SEVERITY.LOW": 0,
+      "SEVERITY.MEDIUM": 0,
+      "SEVERITY.UNDEFINED": 0,
+      "loc": 114,
+      "nosec": 0,
+      "skipped_tests": 0
+    },
+    "src/pipelines/bronze_to_silver_claims.py": {
+      "CONFIDENCE.HIGH": 0,
+      "CONFIDENCE.LOW": 0,
+      "CONFIDENCE.MEDIUM": 0,
+      "CONFIDENCE.UNDEFINED": 0,
+      "SEVERITY.HIGH": 0,
+      "SEVERITY.LOW": 0,
+      "SEVERITY.MEDIUM": 0,
+      "SEVERITY.UNDEFINED": 0,
+      "loc": 122,
+      "nosec": 0,
+      "skipped_tests": 0
+    },
+    "src/pipelines/bronze_to_silver_customers.py": {
+      "CONFIDENCE.HIGH": 0,
+      "CONFIDENCE.LOW": 0,
+      "CONFIDENCE.MEDIUM": 0,
+      "CONFIDENCE.UNDEFINED": 0,
+      "SEVERITY.HIGH": 0,
+      "SEVERITY.LOW": 0,
+      "SEVERITY.MEDIUM": 0,
+      "SEVERITY.UNDEFINED": 0,
+      "loc": 131,
+      "nosec": 0,
+      "skipped_tests": 0
+    },
+    "src/pipelines/bronze_to_silver_payments.py": {
+      "CONFIDENCE.HIGH": 0,
+      "CONFIDENCE.LOW": 0,
+      "CONFIDENCE.MEDIUM": 0,
+      "CONFIDENCE.UNDEFINED": 0,
+      "SEVERITY.HIGH": 0,
+      "SEVERITY.LOW": 0,
+      "SEVERITY.MEDIUM": 0,
+      "SEVERITY.UNDEFINED": 0,
+      "loc": 149,
+      "nosec": 0,
+      "skipped_tests": 0
+    },
+    "src/pipelines/bronze_to_silver_policies.py": {
+      "CONFIDENCE.HIGH": 0,
+      "CONFIDENCE.LOW": 0,
+      "CONFIDENCE.MEDIUM": 0,
+      "CONFIDENCE.UNDEFINED": 0,
+      "SEVERITY.HIGH": 0,
+      "SEVERITY.LOW": 0,
+      "SEVERITY.MEDIUM": 0,
+      "SEVERITY.UNDEFINED": 0,
+      "loc": 125,
+      "nosec": 0,
+      "skipped_tests": 0
+    },
+    "src/transformations/transform_bronze_to_silver.py": {
+      "CONFIDENCE.HIGH": 0,
+      "CONFIDENCE.LOW": 0,
+      "CONFIDENCE.MEDIUM": 0,
+      "CONFIDENCE.UNDEFINED": 0,
+      "SEVERITY.HIGH": 0,
+      "SEVERITY.LOW": 0,
+      "SEVERITY.MEDIUM": 0,
+      "SEVERITY.UNDEFINED": 0,
+      "loc": 264,
+      "nosec": 0,
+      "skipped_tests": 0
+    },
+    "src/utils/cost_monitoring.py": {
+      "CONFIDENCE.HIGH": 0,
+      "CONFIDENCE.LOW": 0,
+      "CONFIDENCE.MEDIUM": 0,
+      "CONFIDENCE.UNDEFINED": 0,
+      "SEVERITY.HIGH": 0,
+      "SEVERITY.LOW": 0,
+      "SEVERITY.MEDIUM": 0,
+      "SEVERITY.UNDEFINED": 0,
+      "loc": 299,
+      "nosec": 0,
+      "skipped_tests": 0
+    },
+    "src/utils/logging_config.py": {
+      "CONFIDENCE.HIGH": 0,
+      "CONFIDENCE.LOW": 0,
+      "CONFIDENCE.MEDIUM": 0,
+      "CONFIDENCE.UNDEFINED": 0,
+      "SEVERITY.HIGH": 0,
+      "SEVERITY.LOW": 0,
+      "SEVERITY.MEDIUM": 0,
+      "SEVERITY.UNDEFINED": 0,
+      "loc": 156,
+      "nosec": 0,
+      "skipped_tests": 0
+    },
+    "src/utils/observability.py": {
+      "CONFIDENCE.HIGH": 0,
+      "CONFIDENCE.LOW": 0,
+      "CONFIDENCE.MEDIUM": 0,
+      "CONFIDENCE.UNDEFINED": 0,
+      "SEVERITY.HIGH": 0,
+      "SEVERITY.LOW": 0,
+      "SEVERITY.MEDIUM": 0,
+      "SEVERITY.UNDEFINED": 0,
+      "loc": 215,
+      "nosec": 0,
+      "skipped_tests": 0
+    }
+  },
+  "results": [
+    {
+      "code": "166         clusters_url = f\"{api_url}/api/2.0/clusters/list\"\n167         response = requests.get(clusters_url, headers=headers)\n168         clusters = response.json().get(\"clusters\", [])\n",
+      "col_offset": 19,
+      "end_col_offset": 62,
+      "filename": "src/analytics/cost_optimization_analysis.py",
+      "issue_confidence": "LOW",
+      "issue_cwe": {
+        "id": 400,
+        "link": "https://cwe.mitre.org/data/definitions/400.html"
+      },
+      "issue_severity": "MEDIUM",
+      "issue_text": "Call to requests without timeout",
+      "line_number": 167,
+      "line_range": [
+        167
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.8.6/plugins/b113_request_without_timeout.html",
+      "test_id": "B113",
+      "test_name": "request_without_timeout"
+    },
+    {
+      "code": "177             params = {\"cluster_id\": cluster_id, \"limit\": 100}\n178             events_response = requests.post(events_url, headers=headers, json=params)\n179             events = events_response.json().get(\"events\", [])\n",
+      "col_offset": 30,
+      "end_col_offset": 85,
+      "filename": "src/analytics/cost_optimization_analysis.py",
+      "issue_confidence": "LOW",
+      "issue_cwe": {
+        "id": 400,
+        "link": "https://cwe.mitre.org/data/definitions/400.html"
+      },
+      "issue_severity": "MEDIUM",
+      "issue_text": "Call to requests without timeout",
+      "line_number": 178,
+      "line_range": [
+        178
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.8.6/plugins/b113_request_without_timeout.html",
+      "test_id": "B113",
+      "test_name": "request_without_timeout"
+    },
+    {
+      "code": "247         params = {\"limit\": 100, \"expand_tasks\": False}\n248         response = requests.get(runs_url, headers=headers, params=params)\n249         runs = response.json().get(\"runs\", [])\n",
+      "col_offset": 19,
+      "end_col_offset": 73,
+      "filename": "src/analytics/cost_optimization_analysis.py",
+      "issue_confidence": "LOW",
+      "issue_cwe": {
+        "id": 400,
+        "link": "https://cwe.mitre.org/data/definitions/400.html"
+      },
+      "issue_severity": "MEDIUM",
+      "issue_text": "Call to requests without timeout",
+      "line_number": 248,
+      "line_range": [
+        248
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.8.6/plugins/b113_request_without_timeout.html",
+      "test_id": "B113",
+      "test_name": "request_without_timeout"
+    },
+    {
+      "code": "111 null_checks = spark.sql(\n112     f\"\"\"\n113     SELECT \n114         'Customers' as table_name,\n115         COUNT(*) - COUNT(customer_id) as null_customer_id,\n116         COUNT(*) - COUNT(email) as null_email,\n117         COUNT(*) - COUNT(state_code) as null_state\n118     FROM {bronze_catalog}.customers.customer_raw\n119     UNION ALL\n120     SELECT \n121         'Policies' as table_name,\n122         COUNT(*) - COUNT(policy_id) as null_policy_id,\n123         COUNT(*) - COUNT(customer_id) as null_customer_id,\n124         COUNT(*) - COUNT(annual_premium) as null_premium\n125     FROM {bronze_catalog}.policies.policy_raw\n126 \"\"\"\n127 )\n",
+      "col_offset": 4,
+      "end_col_offset": 3,
+      "filename": "src/analytics/data_quality_validation.py",
+      "issue_confidence": "LOW",
+      "issue_cwe": {
+        "id": 89,
+        "link": "https://cwe.mitre.org/data/definitions/89.html"
+      },
+      "issue_severity": "MEDIUM",
+      "issue_text": "Possible SQL injection vector through string-based query construction.",
+      "line_number": 112,
+      "line_range": [
+        112,
+        113,
+        114,
+        115,
+        116,
+        117,
+        118,
+        119,
+        120,
+        121,
+        122,
+        123,
+        124,
+        125,
+        126
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.8.6/plugins/b608_hardcoded_sql_expressions.html",
+      "test_id": "B608",
+      "test_name": "hardcoded_sql_expressions"
+    },
+    {
+      "code": "141 orphan_policies = spark.sql(\n142     f\"\"\"\n143     SELECT COUNT(*) as orphan_count\n144     FROM {bronze_catalog}.policies.policy_raw p\n145     LEFT JOIN {bronze_catalog}.customers.customer_raw c ON p.customer_id = c.customer_id\n146     WHERE c.customer_id IS NULL\n147 \"\"\"\n148 ).collect()[0][\"orphan_count\"]\n",
+      "col_offset": 4,
+      "end_col_offset": 3,
+      "filename": "src/analytics/data_quality_validation.py",
+      "issue_confidence": "LOW",
+      "issue_cwe": {
+        "id": 89,
+        "link": "https://cwe.mitre.org/data/definitions/89.html"
+      },
+      "issue_severity": "MEDIUM",
+      "issue_text": "Possible SQL injection vector through string-based query construction.",
+      "line_number": 142,
+      "line_range": [
+        142,
+        143,
+        144,
+        145,
+        146,
+        147
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.8.6/plugins/b608_hardcoded_sql_expressions.html",
+      "test_id": "B608",
+      "test_name": "hardcoded_sql_expressions"
+    },
+    {
+      "code": "153 orphan_claims = spark.sql(\n154     f\"\"\"\n155     SELECT COUNT(*) as orphan_count\n156     FROM {bronze_catalog}.claims.claim_raw cl\n157     LEFT JOIN {bronze_catalog}.policies.policy_raw p ON cl.policy_id = p.policy_id\n158     WHERE p.policy_id IS NULL\n159 \"\"\"\n160 ).collect()[0][\"orphan_count\"]\n",
+      "col_offset": 4,
+      "end_col_offset": 3,
+      "filename": "src/analytics/data_quality_validation.py",
+      "issue_confidence": "LOW",
+      "issue_cwe": {
+        "id": 89,
+        "link": "https://cwe.mitre.org/data/definitions/89.html"
+      },
+      "issue_severity": "MEDIUM",
+      "issue_text": "Possible SQL injection vector through string-based query construction.",
+      "line_number": 154,
+      "line_range": [
+        154,
+        155,
+        156,
+        157,
+        158,
+        159
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.8.6/plugins/b608_hardcoded_sql_expressions.html",
+      "test_id": "B608",
+      "test_name": "hardcoded_sql_expressions"
+    },
+    {
+      "code": "509 # Write the app to a file\n510 with open(\"/tmp/dq_dashboard_app.py\", \"w\") as f:\n511     f.write(streamlit_app_code)\n",
+      "col_offset": 10,
+      "end_col_offset": 36,
+      "filename": "src/analytics/dq_dashboard.py",
+      "issue_confidence": "MEDIUM",
+      "issue_cwe": {
+        "id": 377,
+        "link": "https://cwe.mitre.org/data/definitions/377.html"
+      },
+      "issue_severity": "MEDIUM",
+      "issue_text": "Probable insecure usage of temp file/directory.",
+      "line_number": 510,
+      "line_range": [
+        510
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.8.6/plugins/b108_hardcoded_tmp_directory.html",
+      "test_id": "B108",
+      "test_name": "hardcoded_tmp_directory"
+    },
+    {
+      "code": "549 \n550 with open(\"/tmp/launch_dq_dashboard.sh\", \"w\") as f:\n551     f.write(launcher_script)\n",
+      "col_offset": 10,
+      "end_col_offset": 39,
+      "filename": "src/analytics/dq_dashboard.py",
+      "issue_confidence": "MEDIUM",
+      "issue_cwe": {
+        "id": 377,
+        "link": "https://cwe.mitre.org/data/definitions/377.html"
+      },
+      "issue_severity": "MEDIUM",
+      "issue_text": "Probable insecure usage of temp file/directory.",
+      "line_number": 550,
+      "line_range": [
+        550
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.8.6/plugins/b108_hardcoded_tmp_directory.html",
+      "test_id": "B108",
+      "test_name": "hardcoded_tmp_directory"
+    },
+    {
+      "code": "58         url = f\"{self.host}/api/2.1/jobs/list\"\n59         response = requests.get(url, headers=self.headers)\n60         response.raise_for_status()\n",
+      "col_offset": 19,
+      "end_col_offset": 58,
+      "filename": "src/analytics/pipeline_monitoring_dashboard.py",
+      "issue_confidence": "LOW",
+      "issue_cwe": {
+        "id": 400,
+        "link": "https://cwe.mitre.org/data/definitions/400.html"
+      },
+      "issue_severity": "MEDIUM",
+      "issue_text": "Call to requests without timeout",
+      "line_number": 59,
+      "line_range": [
+        59
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.8.6/plugins/b113_request_without_timeout.html",
+      "test_id": "B113",
+      "test_name": "request_without_timeout"
+    },
+    {
+      "code": "74 \n75         response = requests.get(url, headers=self.headers, params=params)\n76         response.raise_for_status()\n",
+      "col_offset": 19,
+      "end_col_offset": 73,
+      "filename": "src/analytics/pipeline_monitoring_dashboard.py",
+      "issue_confidence": "LOW",
+      "issue_cwe": {
+        "id": 400,
+        "link": "https://cwe.mitre.org/data/definitions/400.html"
+      },
+      "issue_severity": "MEDIUM",
+      "issue_text": "Call to requests without timeout",
+      "line_number": 75,
+      "line_range": [
+        75
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.8.6/plugins/b113_request_without_timeout.html",
+      "test_id": "B113",
+      "test_name": "request_without_timeout"
+    },
+    {
+      "code": "81         url = f\"{self.host}/api/2.1/jobs/runs/get-output\"\n82         response = requests.get(url, headers=self.headers, params={\"run_id\": run_id})\n83         response.raise_for_status()\n",
+      "col_offset": 19,
+      "end_col_offset": 85,
+      "filename": "src/analytics/pipeline_monitoring_dashboard.py",
+      "issue_confidence": "LOW",
+      "issue_cwe": {
+        "id": 400,
+        "link": "https://cwe.mitre.org/data/definitions/400.html"
+      },
+      "issue_severity": "MEDIUM",
+      "issue_text": "Call to requests without timeout",
+      "line_number": 82,
+      "line_range": [
+        82
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.8.6/plugins/b113_request_without_timeout.html",
+      "test_id": "B113",
+      "test_name": "request_without_timeout"
+    },
+    {
+      "code": "289 spark.sql(\n290     f\"\"\"\n291     SELECT \n292         claim_type,\n293         claim_status,\n294         COUNT(*) as count,\n295         ROUND(AVG(claimed_amount), 2) as avg_claimed,\n296         ROUND(AVG(paid_amount), 2) as avg_paid,\n297         ROUND(AVG(fraud_score), 2) as avg_fraud_score\n298     FROM {table_name}\n299     GROUP BY claim_type, claim_status\n300     ORDER BY claim_type, count DESC\n301 \"\"\"\n302 ).show(50)\n",
+      "col_offset": 4,
+      "end_col_offset": 3,
+      "filename": "src/bronze/generate_claims_data.py",
+      "issue_confidence": "LOW",
+      "issue_cwe": {
+        "id": 89,
+        "link": "https://cwe.mitre.org/data/definitions/89.html"
+      },
+      "issue_severity": "MEDIUM",
+      "issue_text": "Possible SQL injection vector through string-based query construction.",
+      "line_number": 290,
+      "line_range": [
+        290,
+        291,
+        292,
+        293,
+        294,
+        295,
+        296,
+        297,
+        298,
+        299,
+        300,
+        301
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.8.6/plugins/b608_hardcoded_sql_expressions.html",
+      "test_id": "B608",
+      "test_name": "hardcoded_sql_expressions"
+    },
+    {
+      "code": "543 spark.sql(\n544     f\"\"\"\n545     SELECT \n546         COUNT(*) as total_customers,\n547         COUNT(DISTINCT customer_id) as unique_customers,\n548         COUNT(DISTINCT email) as unique_emails,\n549         AVG(credit_score) as avg_credit_score,\n550         AVG(annual_income) as avg_annual_income,\n551         COUNT(DISTINCT state_code) as states_count\n552     FROM {table_name}\n553 \"\"\"\n554 ).show()\n",
+      "col_offset": 4,
+      "end_col_offset": 3,
+      "filename": "src/bronze/generate_customers_data.py",
+      "issue_confidence": "LOW",
+      "issue_cwe": {
+        "id": 89,
+        "link": "https://cwe.mitre.org/data/definitions/89.html"
+      },
+      "issue_severity": "MEDIUM",
+      "issue_text": "Possible SQL injection vector through string-based query construction.",
+      "line_number": 544,
+      "line_range": [
+        544,
+        545,
+        546,
+        547,
+        548,
+        549,
+        550,
+        551,
+        552,
+        553
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.8.6/plugins/b608_hardcoded_sql_expressions.html",
+      "test_id": "B608",
+      "test_name": "hardcoded_sql_expressions"
+    },
+    {
+      "code": "559 spark.sql(\n560     f\"\"\"\n561     SELECT \n562         state_code,\n563         COUNT(*) as customer_count,\n564         AVG(annual_income) as avg_income,\n565         AVG(credit_score) as avg_credit_score\n566     FROM {table_name}\n567     GROUP BY state_code\n568     ORDER BY customer_count DESC\n569     LIMIT 10\n570 \"\"\"\n571 ).show()\n",
+      "col_offset": 4,
+      "end_col_offset": 3,
+      "filename": "src/bronze/generate_customers_data.py",
+      "issue_confidence": "LOW",
+      "issue_cwe": {
+        "id": 89,
+        "link": "https://cwe.mitre.org/data/definitions/89.html"
+      },
+      "issue_severity": "MEDIUM",
+      "issue_text": "Possible SQL injection vector through string-based query construction.",
+      "line_number": 560,
+      "line_range": [
+        560,
+        561,
+        562,
+        563,
+        564,
+        565,
+        566,
+        567,
+        568,
+        569,
+        570
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.8.6/plugins/b608_hardcoded_sql_expressions.html",
+      "test_id": "B608",
+      "test_name": "hardcoded_sql_expressions"
+    },
+    {
+      "code": "576 spark.sql(\n577     f\"\"\"\n578     SELECT \n579         customer_segment,\n580         COUNT(*) as count,\n581         ROUND(COUNT(*) * 100.0 / SUM(COUNT(*)) OVER(), 2) as percentage,\n582         AVG(annual_income) as avg_income,\n583         AVG(credit_score) as avg_credit_score\n584     FROM {table_name}\n585     GROUP BY customer_segment\n586     ORDER BY count DESC\n587 \"\"\"\n588 ).show()\n",
+      "col_offset": 4,
+      "end_col_offset": 3,
+      "filename": "src/bronze/generate_customers_data.py",
+      "issue_confidence": "LOW",
+      "issue_cwe": {
+        "id": 89,
+        "link": "https://cwe.mitre.org/data/definitions/89.html"
+      },
+      "issue_severity": "MEDIUM",
+      "issue_text": "Possible SQL injection vector through string-based query construction.",
+      "line_number": 577,
+      "line_range": [
+        577,
+        578,
+        579,
+        580,
+        581,
+        582,
+        583,
+        584,
+        585,
+        586,
+        587
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.8.6/plugins/b608_hardcoded_sql_expressions.html",
+      "test_id": "B608",
+      "test_name": "hardcoded_sql_expressions"
+    },
+    {
+      "code": "521 spark.sql(\n522     f\"\"\"\n523     SELECT \n524         policy_type,\n525         COUNT(*) as policy_count,\n526         ROUND(AVG(annual_premium), 2) as avg_premium,\n527         ROUND(AVG(coverage_amount), 2) as avg_coverage,\n528         COUNT(DISTINCT customer_id) as unique_customers\n529     FROM {table_name}\n530     GROUP BY policy_type\n531     ORDER BY policy_count DESC\n532 \"\"\"\n533 ).show()\n",
+      "col_offset": 4,
+      "end_col_offset": 3,
+      "filename": "src/bronze/generate_policies_data.py",
+      "issue_confidence": "LOW",
+      "issue_cwe": {
+        "id": 89,
+        "link": "https://cwe.mitre.org/data/definitions/89.html"
+      },
+      "issue_severity": "MEDIUM",
+      "issue_text": "Possible SQL injection vector through string-based query construction.",
+      "line_number": 522,
+      "line_range": [
+        522,
+        523,
+        524,
+        525,
+        526,
+        527,
+        528,
+        529,
+        530,
+        531,
+        532
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.8.6/plugins/b608_hardcoded_sql_expressions.html",
+      "test_id": "B608",
+      "test_name": "hardcoded_sql_expressions"
+    },
+    {
+      "code": "537 spark.sql(\n538     f\"\"\"\n539     SELECT \n540         policy_status,\n541         COUNT(*) as count,\n542         ROUND(COUNT(*) * 100.0 / SUM(COUNT(*)) OVER(), 2) as percentage,\n543         ROUND(AVG(annual_premium), 2) as avg_premium\n544     FROM {table_name}\n545     GROUP BY policy_status\n546     ORDER BY count DESC\n547 \"\"\"\n548 ).show()\n",
+      "col_offset": 4,
+      "end_col_offset": 3,
+      "filename": "src/bronze/generate_policies_data.py",
+      "issue_confidence": "LOW",
+      "issue_cwe": {
+        "id": 89,
+        "link": "https://cwe.mitre.org/data/definitions/89.html"
+      },
+      "issue_severity": "MEDIUM",
+      "issue_text": "Possible SQL injection vector through string-based query construction.",
+      "line_number": 538,
+      "line_range": [
+        538,
+        539,
+        540,
+        541,
+        542,
+        543,
+        544,
+        545,
+        546,
+        547
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.8.6/plugins/b608_hardcoded_sql_expressions.html",
+      "test_id": "B608",
+      "test_name": "hardcoded_sql_expressions"
+    },
+    {
+      "code": "232 \n233     query = f\"\"\"\n234     SELECT \n235         forecast_date,\n236         claim_type,\n237         ROUND(predicted_claim_count, 0) AS predicted_claims,\n238         ROUND(predicted_total_amount, 0) AS predicted_amount,\n239         ROUND(confidence_lower_95, 0) AS lower_bound,\n240         ROUND(confidence_upper_95, 0) AS upper_bound\n241     FROM insurance_dev_gold.predictions.claim_forecast\n242     WHERE days_ahead <= {days}\n243     ORDER BY forecast_date, claim_type\n244     \"\"\"\n245 \n",
+      "col_offset": 12,
+      "end_col_offset": 7,
+      "filename": "src/chatbot/insurance_chatbot.py",
+      "issue_confidence": "LOW",
+      "issue_cwe": {
+        "id": 89,
+        "link": "https://cwe.mitre.org/data/definitions/89.html"
+      },
+      "issue_severity": "MEDIUM",
+      "issue_text": "Possible SQL injection vector through string-based query construction.",
+      "line_number": 233,
+      "line_range": [
+        233,
+        234,
+        235,
+        236,
+        237,
+        238,
+        239,
+        240,
+        241,
+        242,
+        243,
+        244
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.8.6/plugins/b608_hardcoded_sql_expressions.html",
+      "test_id": "B608",
+      "test_name": "hardcoded_sql_expressions"
+    },
+    {
+      "code": "252 \n253     query = f\"\"\"\n254     SELECT \n255         policy_id,\n256         policy_type,\n257         state_code,\n258         annual_premium AS current_premium,\n259         recommended_premium,\n260         ROUND(premium_change_percent, 1) AS change_pct,\n261         annual_revenue_impact,\n262         recommendation_category,\n263         implementation_priority,\n264         rationale\n265     FROM insurance_dev_gold.predictions.premium_optimization\n266     WHERE implementation_priority = 'High'\n267     ORDER BY ABS(annual_revenue_impact) DESC\n268     LIMIT {limit}\n269     \"\"\"\n270 \n",
+      "col_offset": 12,
+      "end_col_offset": 7,
+      "filename": "src/chatbot/insurance_chatbot.py",
+      "issue_confidence": "LOW",
+      "issue_cwe": {
+        "id": 89,
+        "link": "https://cwe.mitre.org/data/definitions/89.html"
+      },
+      "issue_severity": "MEDIUM",
+      "issue_text": "Possible SQL injection vector through string-based query construction.",
+      "line_number": 253,
+      "line_range": [
+        253,
+        254,
+        255,
+        256,
+        257,
+        258,
+        259,
+        260,
+        261,
+        262,
+        263,
+        264,
+        265,
+        266,
+        267,
+        268,
+        269
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.8.6/plugins/b608_hardcoded_sql_expressions.html",
+      "test_id": "B608",
+      "test_name": "hardcoded_sql_expressions"
+    },
+    {
+      "code": "298     if intent == \"summary\":\n299         return f\"\"\"\n300         SELECT\n301             (SELECT COUNT(*) FROM {gold_catalog}.predictions.customer_churn_risk \n302              WHERE churn_risk_category = 'High Risk') AS high_risk_customers,\n303             (SELECT SUM(total_annual_premium) FROM {gold_catalog}.predictions.customer_churn_risk \n304              WHERE churn_risk_category = 'High Risk') AS premium_at_risk,\n305             (SELECT COUNT(*) FROM {gold_catalog}.predictions.fraud_alerts \n306              WHERE fraud_risk_category IN ('Critical', 'High')) AS critical_fraud_cases,\n307             (SELECT SUM(estimated_fraud_amount) FROM {gold_catalog}.predictions.fraud_alerts \n308              WHERE fraud_risk_category IN ('Critical', 'High')) AS potential_fraud_amount,\n309             (SELECT SUM(predicted_claim_count) FROM {gold_catalog}.predictions.claim_forecast \n310              WHERE claim_type = 'ALL_TYPES' AND days_ahead <= 30) AS forecast_30d_claims,\n311             (SELECT SUM(predicted_total_amount) FROM {gold_catalog}.predictions.claim_forecast \n312              WHERE claim_type = 'ALL_TYPES' AND days_ahead <= 30) AS forecast_30d_amount,\n313             (SELECT COUNT(*) FROM {gold_catalog}.predictions.premium_optimization \n314              WHERE implementation_priority = 'High') AS high_priority_pricing,\n315             (SELECT SUM(annual_revenue_impact) FROM {gold_catalog}.predictions.premium_optimization \n316              WHERE implementation_priority = 'High') AS revenue_opportunity\n317         \"\"\"\n318 \n",
+      "col_offset": 15,
+      "end_col_offset": 11,
+      "filename": "src/chatbot/insurance_chatbot_native.py",
+      "issue_confidence": "LOW",
+      "issue_cwe": {
+        "id": 89,
+        "link": "https://cwe.mitre.org/data/definitions/89.html"
+      },
+      "issue_severity": "MEDIUM",
+      "issue_text": "Possible SQL injection vector through string-based query construction.",
+      "line_number": 299,
+      "line_range": [
+        299,
+        300,
+        301,
+        302,
+        303,
+        304,
+        305,
+        306,
+        307,
+        308,
+        309,
+        310,
+        311,
+        312,
+        313,
+        314,
+        315,
+        316,
+        317
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.8.6/plugins/b608_hardcoded_sql_expressions.html",
+      "test_id": "B608",
+      "test_name": "hardcoded_sql_expressions"
+    },
+    {
+      "code": "320         limit = params.get(\"limit\", 10)\n321         query = f\"\"\"\n322         SELECT \n323             customer_id,\n324             customer_segment,\n325             state_code,\n326             ROUND(churn_probability, 1) AS churn_prob,\n327             total_annual_premium,\n328             active_policies,\n329             total_claims,\n330             churn_risk_category,\n331             recommended_action\n332         FROM {gold_catalog}.predictions.customer_churn_risk\n333         \"\"\"\n334 \n",
+      "col_offset": 16,
+      "end_col_offset": 11,
+      "filename": "src/chatbot/insurance_chatbot_native.py",
+      "issue_confidence": "LOW",
+      "issue_cwe": {
+        "id": 89,
+        "link": "https://cwe.mitre.org/data/definitions/89.html"
+      },
+      "issue_severity": "MEDIUM",
+      "issue_text": "Possible SQL injection vector through string-based query construction.",
+      "line_number": 321,
+      "line_range": [
+        321,
+        322,
+        323,
+        324,
+        325,
+        326,
+        327,
+        328,
+        329,
+        330,
+        331,
+        332,
+        333
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.8.6/plugins/b608_hardcoded_sql_expressions.html",
+      "test_id": "B608",
+      "test_name": "hardcoded_sql_expressions"
+    },
+    {
+      "code": "344         limit = params.get(\"limit\", 10)\n345         query = f\"\"\"\n346         SELECT \n347             claim_id,\n348             claim_number,\n349             claim_type,\n350             ROUND(combined_fraud_score, 1) AS fraud_score,\n351             claimed_amount,\n352             estimated_fraud_amount,\n353             fraud_risk_category,\n354             recommended_action\n355         FROM {gold_catalog}.predictions.fraud_alerts\n356         WHERE fraud_risk_category IN ('Critical', 'High')\n357         ORDER BY combined_fraud_score DESC\n358         LIMIT {limit}\n359         \"\"\"\n360         return query\n",
+      "col_offset": 16,
+      "end_col_offset": 11,
+      "filename": "src/chatbot/insurance_chatbot_native.py",
+      "issue_confidence": "LOW",
+      "issue_cwe": {
+        "id": 89,
+        "link": "https://cwe.mitre.org/data/definitions/89.html"
+      },
+      "issue_severity": "MEDIUM",
+      "issue_text": "Possible SQL injection vector through string-based query construction.",
+      "line_number": 345,
+      "line_range": [
+        345,
+        346,
+        347,
+        348,
+        349,
+        350,
+        351,
+        352,
+        353,
+        354,
+        355,
+        356,
+        357,
+        358,
+        359
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.8.6/plugins/b608_hardcoded_sql_expressions.html",
+      "test_id": "B608",
+      "test_name": "hardcoded_sql_expressions"
+    },
+    {
+      "code": "363         days = params.get(\"days\", 30)\n364         query = f\"\"\"\n365         SELECT \n366             forecast_date,\n367             claim_type,\n368             ROUND(predicted_claim_count, 0) AS predicted_claims,\n369             ROUND(predicted_total_amount, 0) AS predicted_amount,\n370             ROUND(confidence_lower_95, 0) AS lower_bound,\n371             ROUND(confidence_upper_95, 0) AS upper_bound\n372         FROM {gold_catalog}.predictions.claim_forecast\n373         WHERE days_ahead <= {days}\n374         ORDER BY forecast_date, claim_type\n375         \"\"\"\n376         return query\n",
+      "col_offset": 16,
+      "end_col_offset": 11,
+      "filename": "src/chatbot/insurance_chatbot_native.py",
+      "issue_confidence": "LOW",
+      "issue_cwe": {
+        "id": 89,
+        "link": "https://cwe.mitre.org/data/definitions/89.html"
+      },
+      "issue_severity": "MEDIUM",
+      "issue_text": "Possible SQL injection vector through string-based query construction.",
+      "line_number": 364,
+      "line_range": [
+        364,
+        365,
+        366,
+        367,
+        368,
+        369,
+        370,
+        371,
+        372,
+        373,
+        374,
+        375
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.8.6/plugins/b608_hardcoded_sql_expressions.html",
+      "test_id": "B608",
+      "test_name": "hardcoded_sql_expressions"
+    },
+    {
+      "code": "379         limit = params.get(\"limit\", 10)\n380         query = f\"\"\"\n381         SELECT \n382             policy_id,\n383             policy_type,\n384             state_code,\n385             annual_premium AS current_premium,\n386             recommended_premium,\n387             ROUND(premium_change_percent, 1) AS change_pct,\n388             annual_revenue_impact,\n389             recommendation_category,\n390             rationale\n391         FROM {gold_catalog}.predictions.premium_optimization\n392         WHERE implementation_priority = 'High'\n393         ORDER BY ABS(annual_revenue_impact) DESC\n394         LIMIT {limit}\n395         \"\"\"\n396         return query\n",
+      "col_offset": 16,
+      "end_col_offset": 11,
+      "filename": "src/chatbot/insurance_chatbot_native.py",
+      "issue_confidence": "LOW",
+      "issue_cwe": {
+        "id": 89,
+        "link": "https://cwe.mitre.org/data/definitions/89.html"
+      },
+      "issue_severity": "MEDIUM",
+      "issue_text": "Possible SQL injection vector through string-based query construction.",
+      "line_number": 380,
+      "line_range": [
+        380,
+        381,
+        382,
+        383,
+        384,
+        385,
+        386,
+        387,
+        388,
+        389,
+        390,
+        391,
+        392,
+        393,
+        394,
+        395
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.8.6/plugins/b608_hardcoded_sql_expressions.html",
+      "test_id": "B608",
+      "test_name": "hardcoded_sql_expressions"
+    },
+    {
+      "code": "750     displayHTML(\n751         f\"\"\"\n752     <div style=\"text-align: center; padding: 40px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-radius: 15px; margin: 20px 0;\">\n753         <h1 style=\"margin: 0;\">\ud83e\udd16 Welcome to Insurance Analytics AI</h1>\n754         <p style=\"font-size: 18px; margin: 20px 0;\">Your intelligent assistant for data-driven insights</p>\n755         <div style=\"background: rgba(255,255,255,0.1); padding: 15px; border-radius: 8px; margin: 15px 0; font-size: 14px;\">\n756             <strong>\ud83c\udf0d Environment:</strong> {environment.upper()}<br/>\n757             <strong>\ud83d\udcca Catalog:</strong> {gold_catalog}\n758         </div>\n759         <div style=\"background: rgba(255,255,255,0.2); padding: 20px; border-radius: 10px; margin: 20px 0;\">\n760             <h3>\ud83d\udc46 Get Started:</h3>\n761             <p>1. Select a <strong>Quick Action</strong> from the dropdown, OR</p>\n762             <p>2. Type your question in the text box</p>\n763             <p>3. Re-run this cell to see results!</p>\n764         </div>\n765         <p style=\"font-size: 12px; opacity: 0.8;\">\ud83d\udca1 Tip: Change environment using the catalog dropdown at the top</p>\n766     </div>\n767     \"\"\"\n768     )\n",
+      "col_offset": 8,
+      "end_col_offset": 7,
+      "filename": "src/chatbot/insurance_chatbot_native.py",
+      "issue_confidence": "LOW",
+      "issue_cwe": {
+        "id": 89,
+        "link": "https://cwe.mitre.org/data/definitions/89.html"
+      },
+      "issue_severity": "MEDIUM",
+      "issue_text": "Possible SQL injection vector through string-based query construction.",
+      "line_number": 751,
+      "line_range": [
+        751,
+        752,
+        753,
+        754,
+        755,
+        756,
+        757,
+        758,
+        759,
+        760,
+        761,
+        762,
+        763,
+        764,
+        765,
+        766,
+        767
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.8.6/plugins/b608_hardcoded_sql_expressions.html",
+      "test_id": "B608",
+      "test_name": "hardcoded_sql_expressions"
+    },
+    {
+      "code": "49 # Launch the chatbot\n50 exec(open(\"insurance_chatbot.py\").read())\n51 \n",
+      "col_offset": 0,
+      "end_col_offset": 41,
+      "filename": "src/chatbot/launch_chatbot.py",
+      "issue_confidence": "HIGH",
+      "issue_cwe": {
+        "id": 78,
+        "link": "https://cwe.mitre.org/data/definitions/78.html"
+      },
+      "issue_severity": "MEDIUM",
+      "issue_text": "Use of exec detected.",
+      "line_number": 50,
+      "line_range": [
+        50
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.8.6/plugins/b102_exec_used.html",
+      "test_id": "B102",
+      "test_name": "exec_used"
+    },
+    {
+      "code": "361 spark.sql(\n362     f\"\"\"\n363     SELECT \n364         value_tier,\n365         churn_risk_category,\n366         COUNT(*) as customer_count,\n367         ROUND(AVG(total_annual_premium), 2) as avg_annual_premium,\n368         ROUND(AVG(customer_lifetime_value), 2) as avg_clv,\n369         ROUND(AVG(cross_sell_score), 2) as avg_cross_sell_score\n370     FROM {table_name}\n371     GROUP BY value_tier, churn_risk_category\n372     ORDER BY customer_count DESC\n373 \"\"\"\n374 ).show()\n",
+      "col_offset": 4,
+      "end_col_offset": 3,
+      "filename": "src/gold/build_customer_360.py",
+      "issue_confidence": "LOW",
+      "issue_cwe": {
+        "id": 89,
+        "link": "https://cwe.mitre.org/data/definitions/89.html"
+      },
+      "issue_severity": "MEDIUM",
+      "issue_text": "Possible SQL injection vector through string-based query construction.",
+      "line_number": 362,
+      "line_range": [
+        362,
+        363,
+        364,
+        365,
+        366,
+        367,
+        368,
+        369,
+        370,
+        371,
+        372,
+        373
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.8.6/plugins/b608_hardcoded_sql_expressions.html",
+      "test_id": "B608",
+      "test_name": "hardcoded_sql_expressions"
+    },
+    {
+      "code": "374 spark.sql(\n375     f\"\"\"\n376     SELECT \n377         fraud_risk_category,\n378         COUNT(*) as claim_count,\n379         ROUND(COUNT(*) * 100.0 / SUM(COUNT(*)) OVER(), 2) as percentage,\n380         ROUND(AVG(overall_fraud_score), 2) as avg_fraud_score,\n381         ROUND(SUM(estimated_exposure), 2) as total_exposure,\n382         ROUND(SUM(potential_recovery), 2) as total_potential_recovery\n383     FROM {table_name}\n384     GROUP BY fraud_risk_category\n385     ORDER BY \n386         CASE fraud_risk_category\n387             WHEN 'Critical' THEN 1\n388             WHEN 'High' THEN 2\n389             WHEN 'Medium' THEN 3\n390             ELSE 4\n391         END\n392 \"\"\"\n393 ).show()\n",
+      "col_offset": 4,
+      "end_col_offset": 3,
+      "filename": "src/gold/build_fraud_detection.py",
+      "issue_confidence": "LOW",
+      "issue_cwe": {
+        "id": 89,
+        "link": "https://cwe.mitre.org/data/definitions/89.html"
+      },
+      "issue_severity": "MEDIUM",
+      "issue_text": "Possible SQL injection vector through string-based query construction.",
+      "line_number": 375,
+      "line_range": [
+        375,
+        376,
+        377,
+        378,
+        379,
+        380,
+        381,
+        382,
+        383,
+        384,
+        385,
+        386,
+        387,
+        388,
+        389,
+        390,
+        391,
+        392
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.8.6/plugins/b608_hardcoded_sql_expressions.html",
+      "test_id": "B608",
+      "test_name": "hardcoded_sql_expressions"
+    },
+    {
+      "code": "187         df_pandas[col_name] = pd.to_numeric(df_pandas[col_name], errors=\"coerce\")\n188     except:\n189         pass\n190 \n",
+      "col_offset": 4,
+      "end_col_offset": 12,
+      "filename": "src/ml/predict_customer_churn_sklearn.py",
+      "issue_confidence": "HIGH",
+      "issue_cwe": {
+        "id": 703,
+        "link": "https://cwe.mitre.org/data/definitions/703.html"
+      },
+      "issue_severity": "LOW",
+      "issue_text": "Try, Except, Pass detected.",
+      "line_number": 188,
+      "line_range": [
+        188,
+        189
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.8.6/plugins/b110_try_except_pass.html",
+      "test_id": "B110",
+      "test_name": "try_except_pass"
+    },
+    {
+      "code": "173             df_pandas[col_name] = pd.to_numeric(df_pandas[col_name], errors=\"coerce\")\n174         except:\n175             pass\n176 \n",
+      "col_offset": 8,
+      "end_col_offset": 16,
+      "filename": "src/ml/predict_fraud_enhanced_sklearn.py",
+      "issue_confidence": "HIGH",
+      "issue_cwe": {
+        "id": 703,
+        "link": "https://cwe.mitre.org/data/definitions/703.html"
+      },
+      "issue_severity": "LOW",
+      "issue_text": "Try, Except, Pass detected.",
+      "line_number": 174,
+      "line_range": [
+        174,
+        175
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.8.6/plugins/b110_try_except_pass.html",
+      "test_id": "B110",
+      "test_name": "try_except_pass"
+    }
+  ]
+}

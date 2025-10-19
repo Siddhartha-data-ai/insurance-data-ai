@@ -56,7 +56,7 @@ class DatabricksJobsAPI:
     def list_jobs(self, name_filter=None):
         """List all jobs"""
         url = f"{self.host}/api/2.1/jobs/list"
-        response = requests.get(url, headers=self.headers)
+        response = requests.get(url, headers=self.headers, timeout=30)
         response.raise_for_status()
         jobs = response.json().get("jobs", [])
 
@@ -72,14 +72,14 @@ class DatabricksJobsAPI:
         if job_id:
             params["job_id"] = job_id
 
-        response = requests.get(url, headers=self.headers, params=params)
+        response = requests.get(url, headers=self.headers, params=params, timeout=30)
         response.raise_for_status()
         return response.json().get("runs", [])
 
     def get_run_output(self, run_id):
         """Get output from a specific run"""
         url = f"{self.host}/api/2.1/jobs/runs/get-output"
-        response = requests.get(url, headers=self.headers, params={"run_id": run_id})
+        response = requests.get(url, headers=self.headers, params={"run_id": run_id}, timeout=30)
         response.raise_for_status()
         return response.json()
 

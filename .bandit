@@ -1,0 +1,14 @@
+# Bandit configuration for Databricks Insurance Data AI project
+# https://bandit.readthedocs.io/en/latest/config.html
+
+exclude_dirs:
+  - /tests/
+  - /.databricks/
+  - /__pycache__/
+  - /.venv/
+  - /venv/
+  - /build/
+  - /dist/
+
+skips:
+  - B608  # hardcoded_sql_expressions - False positive for f-strings in Spark SQL with controlled variables
