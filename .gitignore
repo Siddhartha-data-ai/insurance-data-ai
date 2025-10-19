@@ -32,6 +32,9 @@ Thumbs.db
 *.log
 logs/
 
+# Security scan reports
+bandit_report.json
+
 # Environment files
 .env
 .env.local
