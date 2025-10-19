@@ -22,15 +22,17 @@ exclude =
     .mypy_cache,
     notebooks/.ipynb_checkpoints
 
-# Per-file ignores for Databricks notebook files
+# Per-file ignores for Databricks notebook files and tests
 per-file-ignores =
-    src/analytics/*.py:F821
-    src/bronze/*.py:F821
-    src/pipelines/*.py:F821
-    src/gold/*.py:F821
-    src/ml/*.py:F821
-    src/chatbot/*.py:F821
-    src/transformations/*.py:F821
+    src/analytics/*.py:F821,F403,F405
+    src/bronze/*.py:F821,F403,F405
+    src/pipelines/*.py:F821,F403,F405
+    src/gold/*.py:F821,F403,F405
+    src/ml/*.py:F821,F403,F405
+    src/chatbot/*.py:F821,F403,F405
+    src/transformations/*.py:F821,F403,F405
+    tests/*.py:E712,E722,F841,W291
+    tests/*/*.py:E712,E722,F841,W291
 
 # File patterns to check
 filename = *.py
