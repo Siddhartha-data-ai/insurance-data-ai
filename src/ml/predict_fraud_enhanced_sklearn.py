@@ -1,9 +1,9 @@
 # Databricks notebook source
 # MAGIC %md
 # MAGIC # Enhanced Fraud Detection Model (Scikit-Learn)
-# MAGIC 
+# MAGIC
 # MAGIC **Community Edition Compatible - Uses pandas + scikit-learn**
-# MAGIC 
+# MAGIC
 # MAGIC **ML-powered fraud detection to identify suspicious claims**
 
 # COMMAND ----------
@@ -22,12 +22,18 @@ from sklearn.metrics import roc_auc_score, precision_score, recall_score, f1_sco
 # MAGIC ## Configuration
 
 # COMMAND ----------
-dbutils.widgets.dropdown("silver_catalog", "insurance_dev_silver", 
-                         ["insurance_dev_silver", "insurance_staging_silver", "insurance_prod_silver"], 
-                         "Silver Catalog")
-dbutils.widgets.dropdown("gold_catalog", "insurance_dev_gold", 
-                         ["insurance_dev_gold", "insurance_staging_gold", "insurance_prod_gold"], 
-                         "Gold Catalog")
+dbutils.widgets.dropdown(
+    "silver_catalog",
+    "insurance_dev_silver",
+    ["insurance_dev_silver", "insurance_staging_silver", "insurance_prod_silver"],
+    "Silver Catalog",
+)
+dbutils.widgets.dropdown(
+    "gold_catalog",
+    "insurance_dev_gold",
+    ["insurance_dev_gold", "insurance_staging_gold", "insurance_prod_gold"],
+    "Gold Catalog",
+)
 
 silver_catalog = dbutils.widgets.get("silver_catalog")
 gold_catalog = dbutils.widgets.get("gold_catalog")
@@ -60,48 +66,80 @@ print(f"   Policies: {df_policies.count():,}")
 print("🔧 Engineering fraud detection features...")
 
 # Join tables
-df_fraud_features = df_claims.alias("c") \
-    .join(df_policies.alias("p").select("policy_id", "annual_premium", "coverage_amount", "state_code", "policy_type"), 
-          "policy_id", "left") \
-    .join(df_customers.alias("cust").select("customer_id", "age_years", "customer_tenure_months", "customer_segment", "credit_tier"), 
-          "customer_id", "left")
+df_fraud_features = (
+    df_claims.alias("c")
+    .join(
+        df_policies.alias("p").select("policy_id", "annual_premium", "coverage_amount", "state_code", "policy_type"),
+        "policy_id",
+        "left",
+    )
+    .join(
+        df_customers.alias("cust").select(
+            "customer_id", "age_years", "customer_tenure_months", "customer_segment", "credit_tier"
+        ),
+        "customer_id",
+        "left",
+    )
+)
 
 # Claim features
-df_fraud_features = df_fraud_features \
-    .withColumn("claim_to_premium_ratio", 
-                when(col("annual_premium") > 0, col("claimed_amount") / col("annual_premium")).otherwise(0)) \
-    .withColumn("claim_to_coverage_ratio",
-                when(col("coverage_amount") > 0, col("claimed_amount") / col("coverage_amount")).otherwise(0)) \
-    .withColumn("excessive_claim", when(col("claim_to_coverage_ratio") > 0.8, 1).otherwise(0)) \
-    .withColumn("late_reporting", when(col("days_to_report") > 7, 1).otherwise(0)) \
-    .withColumn("location_risk", 
-                when(col("loss_location_state") != col("state_code"), 1).otherwise(0)) \
-    .withColumn("high_amount", when(col("claimed_amount") > 50000, 1).otherwise(0)) \
-    .withColumn("quick_settlement", 
-                when(col("days_open") < 5, 1).otherwise(0))
+df_fraud_features = (
+    df_fraud_features.withColumn(
+        "claim_to_premium_ratio",
+        when(col("annual_premium") > 0, col("claimed_amount") / col("annual_premium")).otherwise(0),
+    )
+    .withColumn(
+        "claim_to_coverage_ratio",
+        when(col("coverage_amount") > 0, col("claimed_amount") / col("coverage_amount")).otherwise(0),
+    )
+    .withColumn("excessive_claim", when(col("claim_to_coverage_ratio") > 0.8, 1).otherwise(0))
+    .withColumn("late_reporting", when(col("days_to_report") > 7, 1).otherwise(0))
+    .withColumn("location_risk", when(col("loss_location_state") != col("state_code"), 1).otherwise(0))
+    .withColumn("high_amount", when(col("claimed_amount") > 50000, 1).otherwise(0))
+    .withColumn("quick_settlement", when(col("days_open") < 5, 1).otherwise(0))
+)
 
 # Customer history
 window_cust = Window.partitionBy("customer_id")
-df_fraud_features = df_fraud_features \
-    .withColumn("customer_claim_count", F.count("*").over(window_cust)) \
-    .withColumn("customer_total_claimed", F.sum("claimed_amount").over(window_cust)) \
-    .withColumn("customer_avg_claim", F.avg("claimed_amount").over(window_cust)) \
+df_fraud_features = (
+    df_fraud_features.withColumn("customer_claim_count", F.count("*").over(window_cust))
+    .withColumn("customer_total_claimed", F.sum("claimed_amount").over(window_cust))
+    .withColumn("customer_avg_claim", F.avg("claimed_amount").over(window_cust))
     .withColumn("frequent_claimant", when(col("customer_claim_count") > 3, 1).otherwise(0))
+)
 
 # Target variable - use lower threshold to ensure we have positive examples
 df_fraud_features = df_fraud_features.withColumn(
     "is_fraud",
-    when((col("fraud_score") > 0.5) | (col("siu_referral") == True) | 
-         (col("excessive_claim") == 1) | (col("late_reporting") == 1), 1).otherwise(0)
+    when(
+        (col("fraud_score") > 0.5)
+        | (col("siu_referral") == True)
+        | (col("excessive_claim") == 1)
+        | (col("late_reporting") == 1),
+        1,
+    ).otherwise(0),
 )
 
 # Fill nulls
 numeric_features = [
-    "claim_to_premium_ratio", "claim_to_coverage_ratio", "excessive_claim",
-    "late_reporting", "location_risk", "high_amount", "quick_settlement",
-    "customer_claim_count", "customer_total_claimed", "customer_avg_claim",
-    "frequent_claimant", "days_to_report", "days_open", "age_years", "customer_tenure_months",
-    "claimed_amount", "paid_amount", "fraud_score"
+    "claim_to_premium_ratio",
+    "claim_to_coverage_ratio",
+    "excessive_claim",
+    "late_reporting",
+    "location_risk",
+    "high_amount",
+    "quick_settlement",
+    "customer_claim_count",
+    "customer_total_claimed",
+    "customer_avg_claim",
+    "frequent_claimant",
+    "days_to_report",
+    "days_open",
+    "age_years",
+    "customer_tenure_months",
+    "claimed_amount",
+    "paid_amount",
+    "fraud_score",
 ]
 
 for c in numeric_features:
@@ -121,12 +159,17 @@ df_pandas = df_fraud_features.toPandas()
 df_pandas = df_pandas.fillna(0)
 
 # Convert all numeric columns from Decimal to float (Spark Decimal causes pandas arithmetic issues)
-numeric_cols_to_convert = df_pandas.select_dtypes(include=['object']).columns
+numeric_cols_to_convert = df_pandas.select_dtypes(include=["object"]).columns
 for col_name in numeric_cols_to_convert:
-    if col_name in numeric_features or col_name in ['fraud_score', 'claimed_amount', 'paid_amount', 
-                                                      'annual_premium', 'coverage_amount']:
+    if col_name in numeric_features or col_name in [
+        "fraud_score",
+        "claimed_amount",
+        "paid_amount",
+        "annual_premium",
+        "coverage_amount",
+    ]:
         try:
-            df_pandas[col_name] = pd.to_numeric(df_pandas[col_name], errors='coerce')
+            df_pandas[col_name] = pd.to_numeric(df_pandas[col_name], errors="coerce")
         except:
             pass
 
@@ -143,15 +186,28 @@ print("🤖 Training fraud detection model...")
 
 # Feature columns
 feature_cols = [
-    "claimed_amount", "paid_amount", "days_to_report", "days_open",
-    "claim_to_premium_ratio", "claim_to_coverage_ratio",
-    "excessive_claim", "late_reporting", "location_risk", "high_amount", "quick_settlement",
-    "customer_claim_count", "customer_total_claimed", "customer_avg_claim", "frequent_claimant",
-    "age_years", "customer_tenure_months", "fraud_score"
+    "claimed_amount",
+    "paid_amount",
+    "days_to_report",
+    "days_open",
+    "claim_to_premium_ratio",
+    "claim_to_coverage_ratio",
+    "excessive_claim",
+    "late_reporting",
+    "location_risk",
+    "high_amount",
+    "quick_settlement",
+    "customer_claim_count",
+    "customer_total_claimed",
+    "customer_avg_claim",
+    "frequent_claimant",
+    "age_years",
+    "customer_tenure_months",
+    "fraud_score",
 ]
 
 X = df_pandas[feature_cols].values
-y = df_pandas['is_fraud'].values
+y = df_pandas["is_fraud"].values
 
 # Check class balance
 fraud_count = y.sum()
@@ -167,7 +223,7 @@ if fraud_count == 0:
     print("\n⚠️  WARNING: No fraud cases found in training data!")
     print("   All claims will be predicted as non-fraudulent.")
     print("   Adjusting fraud detection to use existing fraud_score...")
-    
+
     # Skip ML model, just use rule-based approach
     has_ml_model = False
 elif fraud_count == len(y):
@@ -181,18 +237,18 @@ else:
     except ValueError:
         # Fallback if stratify fails
         X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
-    
+
     # Scale
     scaler = StandardScaler()
     X_train_scaled = scaler.fit_transform(X_train)
     X_test_scaled = scaler.transform(X_test)
-    
+
     # Train
     model = RandomForestClassifier(n_estimators=100, max_depth=10, random_state=42, n_jobs=-1)
     model.fit(X_train_scaled, y_train)
-    
+
     has_ml_model = True
-    
+
     print(f"\n✅ Model trained!")
     print(f"   Training samples: {len(X_train):,}")
     print(f"   Fraud rate: {y_train.mean()*100:.2f}%")
@@ -207,7 +263,7 @@ print("📈 Evaluating model...")
 if has_ml_model:
     y_pred = model.predict(X_test_scaled)
     y_pred_proba = model.predict_proba(X_test_scaled)
-    
+
     # Handle single-class case
     if y_pred_proba.shape[1] == 1:
         print("⚠️  Model only learned one class - using rule-based fallback")
@@ -218,12 +274,12 @@ if has_ml_model:
         f1 = 0.0
     else:
         y_pred_proba = y_pred_proba[:, 1]
-        
+
         try:
             auc = roc_auc_score(y_test, y_pred_proba)
         except:
             auc = 0.5
-        
+
         try:
             precision = precision_score(y_test, y_pred, zero_division=0)
             recall = recall_score(y_test, y_pred, zero_division=0)
@@ -232,7 +288,7 @@ if has_ml_model:
             precision = 0.0
             recall = 0.0
             f1 = 0.0
-        
+
         print(f"✅ Model Performance:")
         print(f"   AUC-ROC: {auc:.3f}")
         print(f"   Precision: {precision:.3f}")
@@ -254,73 +310,89 @@ else:
 print("🎯 Generating fraud predictions...")
 
 # Filter open claims
-df_open = df_pandas[df_pandas['is_closed'] == False].copy()
+df_open = df_pandas[df_pandas["is_closed"] == False].copy()
 
 if has_ml_model:
     # Use ML model predictions
     X_open = df_open[feature_cols].values
     X_open_scaled = scaler.transform(X_open)
-    
+
     ml_fraud_proba_array = model.predict_proba(X_open_scaled)
-    
+
     # Handle single-class case
     if ml_fraud_proba_array.shape[1] == 1:
         ml_fraud_proba = np.full(len(df_open), 50.0)  # Neutral 50% if can't predict
     else:
         ml_fraud_proba = ml_fraud_proba_array[:, 1] * 100
-    
-    df_open['ml_fraud_score'] = ml_fraud_proba
-    df_open['combined_fraud_score'] = (df_open['ml_fraud_score'] + df_open['fraud_score'] * 100) / 2
+
+    df_open["ml_fraud_score"] = ml_fraud_proba
+    df_open["combined_fraud_score"] = (df_open["ml_fraud_score"] + df_open["fraud_score"] * 100) / 2
 else:
     # Use rule-based approach only
-    df_open['ml_fraud_score'] = df_open['fraud_score'] * 100  # Use existing score
-    
-    # Enhanced rule-based scoring
-    df_open['combined_fraud_score'] = (
-        df_open['fraud_score'] * 100 * 0.4 +  # 40% original score
-        df_open['excessive_claim'] * 25 +      # 25 points if excessive
-        df_open['late_reporting'] * 20 +       # 20 points if late
-        df_open['location_risk'] * 15 +        # 15 points if location mismatch
-        df_open['frequent_claimant'] * 20      # 20 points if frequent
-    )
-    
-    # Cap at 100
-    df_open['combined_fraud_score'] = df_open['combined_fraud_score'].clip(0, 100)
+    df_open["ml_fraud_score"] = df_open["fraud_score"] * 100  # Use existing score
 
-df_open['fraud_risk_category'] = pd.cut(
-    df_open['combined_fraud_score'],
-    bins=[0, 30, 50, 70, 100],
-    labels=['Low', 'Medium', 'High', 'Critical']
+    # Enhanced rule-based scoring
+    df_open["combined_fraud_score"] = (
+        df_open["fraud_score"] * 100 * 0.4  # 40% original score
+        + df_open["excessive_claim"] * 25  # 25 points if excessive
+        + df_open["late_reporting"] * 20  # 20 points if late
+        + df_open["location_risk"] * 15  # 15 points if location mismatch
+        + df_open["frequent_claimant"] * 20  # 20 points if frequent
+    )
+
+    # Cap at 100
+    df_open["combined_fraud_score"] = df_open["combined_fraud_score"].clip(0, 100)
+
+df_open["fraud_risk_category"] = pd.cut(
+    df_open["combined_fraud_score"], bins=[0, 30, 50, 70, 100], labels=["Low", "Medium", "High", "Critical"]
 )
 
-df_open['investigation_priority'] = df_open['fraud_risk_category'].map({
-    'Low': 4, 'Medium': 3, 'High': 2, 'Critical': 1
-})
+df_open["investigation_priority"] = df_open["fraud_risk_category"].map(
+    {"Low": 4, "Medium": 3, "High": 2, "Critical": 1}
+)
 
-df_open['recommended_action'] = df_open['fraud_risk_category'].map({
-    'Critical': 'Immediate SIU Investigation',
-    'High': 'Detailed Review Required',
-    'Medium': 'Additional Documentation',
-    'Low': 'Standard Processing'
-})
+df_open["recommended_action"] = df_open["fraud_risk_category"].map(
+    {
+        "Critical": "Immediate SIU Investigation",
+        "High": "Detailed Review Required",
+        "Medium": "Additional Documentation",
+        "Low": "Standard Processing",
+    }
+)
 
-df_open['estimated_fraud_amount'] = df_open['claimed_amount'] * df_open['combined_fraud_score'] / 100
-df_open['prediction_date'] = pd.Timestamp.now().date()
+df_open["estimated_fraud_amount"] = df_open["claimed_amount"] * df_open["combined_fraud_score"] / 100
+df_open["prediction_date"] = pd.Timestamp.now().date()
 
 # Select final columns
 final_cols = [
-    'claim_id', 'claim_number', 'customer_id', 'policy_id', 'claim_type', 'claim_status',
-    'claimed_amount', 'loss_date', 'report_date', 'fraud_score', 'ml_fraud_score',
-    'combined_fraud_score', 'fraud_risk_category', 'investigation_priority',
-    'recommended_action', 'estimated_fraud_amount', 'excessive_claim', 'late_reporting',
-    'location_risk', 'frequent_claimant', 'prediction_date'
+    "claim_id",
+    "claim_number",
+    "customer_id",
+    "policy_id",
+    "claim_type",
+    "claim_status",
+    "claimed_amount",
+    "loss_date",
+    "report_date",
+    "fraud_score",
+    "ml_fraud_score",
+    "combined_fraud_score",
+    "fraud_risk_category",
+    "investigation_priority",
+    "recommended_action",
+    "estimated_fraud_amount",
+    "excessive_claim",
+    "late_reporting",
+    "location_risk",
+    "frequent_claimant",
+    "prediction_date",
 ]
 
 df_predictions = df_open[final_cols]
 
 print(f"✅ Generated predictions for {len(df_predictions):,} claims")
 print(f"\n📊 Fraud Risk Distribution:")
-print(df_predictions['fraud_risk_category'].value_counts())
+print(df_predictions["fraud_risk_category"].value_counts())
 
 # COMMAND ----------
 # MAGIC %md
@@ -335,16 +407,16 @@ spark.sql(f"CREATE SCHEMA IF NOT EXISTS {gold_catalog}.predictions")
 
 table_name = f"{gold_catalog}.predictions.fraud_alerts"
 
-df_predictions_spark.write \
-    .format("delta") \
-    .mode("overwrite") \
-    .option("overwriteSchema", "true") \
-    .saveAsTable(table_name)
+df_predictions_spark.write.format("delta").mode("overwrite").option("overwriteSchema", "true").saveAsTable(table_name)
 
 print(f"✅ Saved to: {table_name}")
 
 print("\n🚨 Critical Fraud Cases:")
-display(df_predictions_spark.filter(col("fraud_risk_category") == "Critical").orderBy(F.desc("combined_fraud_score")).limit(10))
+display(
+    df_predictions_spark.filter(col("fraud_risk_category") == "Critical")
+    .orderBy(F.desc("combined_fraud_score"))
+    .limit(10)
+)
 
 # COMMAND ----------
 # MAGIC %md
@@ -355,15 +427,15 @@ print("=" * 70)
 print("🚨 FRAUD DETECTION MODEL - SUMMARY")
 print("=" * 70)
 
-summary = df_predictions.groupby('fraud_risk_category').agg({
-    'claim_id': 'count',
-    'combined_fraud_score': 'mean',
-    'estimated_fraud_amount': 'sum'
-}).round(2)
+summary = (
+    df_predictions.groupby("fraud_risk_category")
+    .agg({"claim_id": "count", "combined_fraud_score": "mean", "estimated_fraud_amount": "sum"})
+    .round(2)
+)
 
-summary.columns = ['claim_count', 'avg_fraud_score', 'total_potential_fraud']
+summary.columns = ["claim_count", "avg_fraud_score", "total_potential_fraud"]
 
-for category in ['Critical', 'High', 'Medium', 'Low']:
+for category in ["Critical", "High", "Medium", "Low"]:
     if category in summary.index:
         row = summary.loc[category]
         print(f"\n{category} Risk:")
@@ -375,4 +447,3 @@ print("\n" + "=" * 70)
 print(f"✅ Model AUC: {auc:.3f}, F1: {f1:.3f}")
 print(f"✅ Predictions saved to: {table_name}")
 print("=" * 70)
-

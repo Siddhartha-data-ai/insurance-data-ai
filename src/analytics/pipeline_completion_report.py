@@ -9,15 +9,24 @@ from datetime import datetime
 
 # COMMAND ----------
 # Create widgets for parameters
-dbutils.widgets.dropdown("bronze_catalog", "insurance_dev_bronze", 
-                         ["insurance_dev_bronze", "insurance_staging_bronze", "insurance_prod_bronze"], 
-                         "Bronze Catalog Name")
-dbutils.widgets.dropdown("silver_catalog", "insurance_dev_silver", 
-                         ["insurance_dev_silver", "insurance_staging_silver", "insurance_prod_silver"], 
-                         "Silver Catalog Name")
-dbutils.widgets.dropdown("gold_catalog", "insurance_dev_gold", 
-                         ["insurance_dev_gold", "insurance_staging_gold", "insurance_prod_gold"], 
-                         "Gold Catalog Name")
+dbutils.widgets.dropdown(
+    "bronze_catalog",
+    "insurance_dev_bronze",
+    ["insurance_dev_bronze", "insurance_staging_bronze", "insurance_prod_bronze"],
+    "Bronze Catalog Name",
+)
+dbutils.widgets.dropdown(
+    "silver_catalog",
+    "insurance_dev_silver",
+    ["insurance_dev_silver", "insurance_staging_silver", "insurance_prod_silver"],
+    "Silver Catalog Name",
+)
+dbutils.widgets.dropdown(
+    "gold_catalog",
+    "insurance_dev_gold",
+    ["insurance_dev_gold", "insurance_staging_gold", "insurance_prod_gold"],
+    "Gold Catalog Name",
+)
 dbutils.widgets.text("job_run_id", "manual", "Job Run ID")
 
 # Get widget values
@@ -36,7 +45,9 @@ print(f"Using gold catalog: {gold_catalog}")
 
 # COMMAND ----------
 # Collect record counts
-environment = "manual" if job_run_id == "manual" else bronze_catalog.split("_")[1] if "_" in bronze_catalog else "unknown"
+environment = (
+    "manual" if job_run_id == "manual" else bronze_catalog.split("_")[1] if "_" in bronze_catalog else "unknown"
+)
 
 print("📊 Collecting pipeline statistics...")
 
@@ -46,7 +57,7 @@ stats = {
     "job_run_id": job_run_id,
     "bronze": {},
     "silver": {},
-    "gold": {}
+    "gold": {},
 }
 
 # Bronze layer counts
@@ -61,7 +72,9 @@ except Exception as e:
 
 # Silver layer counts
 try:
-    stats["silver"]["customers"] = spark.table(f"{silver_catalog}.customers.customer_dim").filter("is_current = true").count()
+    stats["silver"]["customers"] = (
+        spark.table(f"{silver_catalog}.customers.customer_dim").filter("is_current = true").count()
+    )
     stats["silver"]["policies"] = spark.table(f"{silver_catalog}.policies.policy_dim").count()
     stats["silver"]["claims"] = spark.table(f"{silver_catalog}.claims.claim_fact").count()
     print(f"✅ Silver layer: {sum(stats['silver'].values()):,} total records")
@@ -144,13 +157,14 @@ print(report)
 # COMMAND ----------
 # In production, you would send this via email or Slack
 # For now, just display the report
-displayHTML(f"""
+displayHTML(
+    f"""
 <div style="font-family: monospace; background: #f5f5f5; padding: 20px; border-radius: 5px;">
 <h2 style="color: #2e7d32;">✅ Pipeline Execution Complete</h2>
 <pre>{report}</pre>
 </div>
-""")
+"""
+)
 
 # COMMAND ----------
 dbutils.notebook.exit("SUCCESS")
-

@@ -1,16 +1,16 @@
 # Databricks notebook source
 # MAGIC %md
 # MAGIC # Customer Churn Prediction Model
-# MAGIC 
+# MAGIC
 # MAGIC **Predicts which customers are at risk of canceling their policies in the next 30 days**
-# MAGIC 
+# MAGIC
 # MAGIC **Features:**
 # MAGIC - Customer demographics and tenure
 # MAGIC - Policy characteristics and premium history
 # MAGIC - Claims history and patterns
 # MAGIC - Payment behavior
 # MAGIC - Customer engagement metrics
-# MAGIC 
+# MAGIC
 # MAGIC **Output:** Churn probability, risk category, and recommended actions
 
 # COMMAND ----------
@@ -30,12 +30,18 @@ import numpy as np
 
 # COMMAND ----------
 # Create widgets
-dbutils.widgets.dropdown("silver_catalog", "insurance_dev_silver", 
-                         ["insurance_dev_silver", "insurance_staging_silver", "insurance_prod_silver"], 
-                         "Silver Catalog")
-dbutils.widgets.dropdown("gold_catalog", "insurance_dev_gold", 
-                         ["insurance_dev_gold", "insurance_staging_gold", "insurance_prod_gold"], 
-                         "Gold Catalog")
+dbutils.widgets.dropdown(
+    "silver_catalog",
+    "insurance_dev_silver",
+    ["insurance_dev_silver", "insurance_staging_silver", "insurance_prod_silver"],
+    "Silver Catalog",
+)
+dbutils.widgets.dropdown(
+    "gold_catalog",
+    "insurance_dev_gold",
+    ["insurance_dev_gold", "insurance_staging_gold", "insurance_prod_gold"],
+    "Gold Catalog",
+)
 dbutils.widgets.dropdown("churn_window_days", "30", ["30", "60", "90"], "Churn Prediction Window (Days)")
 
 silver_catalog = dbutils.widgets.get("silver_catalog")
@@ -83,19 +89,18 @@ df_features = df_customers.select(
     "credit_tier",
     "customer_segment",
     "customer_status",
-    "state_code"
+    "state_code",
 ).withColumn(
     "credit_score_numeric",
     when(col("credit_tier") == "Excellent", 4)
     .when(col("credit_tier") == "Good", 3)
     .when(col("credit_tier") == "Fair", 2)
-    .otherwise(1)
+    .otherwise(1),
 )
 
 # Target variable: customer_status == 'Cancelled' as historical churn indicator
 df_features = df_features.withColumn(
-    "churned",
-    when(col("customer_status").isin("Cancelled", "Inactive"), 1).otherwise(0)
+    "churned", when(col("customer_status").isin("Cancelled", "Inactive"), 1).otherwise(0)
 )
 
 # Policy aggregations per customer
@@ -108,37 +113,49 @@ df_policy_agg = df_policies.groupBy("customer_id").agg(
     F.avg("policy_age_days").alias("avg_policy_age_days"),
     F.max("policy_age_days").alias("max_policy_age_days"),
     F.min("policy_age_days").alias("min_policy_age_days"),
-    F.countDistinct("policy_type").alias("policy_type_diversity")
+    F.countDistinct("policy_type").alias("policy_type_diversity"),
 )
 
 df_features = df_features.join(df_policy_agg, "customer_id", "left")
 
 # Claims aggregations per customer
-df_claims_agg = df_claims.groupBy("customer_id").agg(
-    F.count("*").alias("total_claims"),
-    F.sum(when(~col("is_closed"), 1).otherwise(0)).alias("open_claims"),
-    F.sum("claimed_amount").alias("total_claimed_amount"),
-    F.sum("paid_amount").alias("total_paid_amount"),
-    F.avg("fraud_score").alias("avg_fraud_score"),
-    F.max("loss_date").alias("last_claim_date")
-).withColumn(
-    "days_since_last_claim",
-    datediff(current_date(), col("last_claim_date"))
-).withColumn(
-    "claim_paid_ratio",
-    when(col("total_claimed_amount") > 0, col("total_paid_amount") / col("total_claimed_amount")).otherwise(0)
+df_claims_agg = (
+    df_claims.groupBy("customer_id")
+    .agg(
+        F.count("*").alias("total_claims"),
+        F.sum(when(~col("is_closed"), 1).otherwise(0)).alias("open_claims"),
+        F.sum("claimed_amount").alias("total_claimed_amount"),
+        F.sum("paid_amount").alias("total_paid_amount"),
+        F.avg("fraud_score").alias("avg_fraud_score"),
+        F.max("loss_date").alias("last_claim_date"),
+    )
+    .withColumn("days_since_last_claim", datediff(current_date(), col("last_claim_date")))
+    .withColumn(
+        "claim_paid_ratio",
+        when(col("total_claimed_amount") > 0, col("total_paid_amount") / col("total_claimed_amount")).otherwise(0),
+    )
 )
 
 df_features = df_features.join(df_claims_agg, "customer_id", "left")
 
 # Fill nulls for customers with no policies or claims
 numeric_cols = [
-    "total_policies", "active_policies", "inactive_policies",
-    "avg_annual_premium", "total_annual_premium",
-    "avg_policy_age_days", "max_policy_age_days", "min_policy_age_days",
-    "policy_type_diversity", "total_claims", "open_claims",
-    "total_claimed_amount", "total_paid_amount", "avg_fraud_score",
-    "days_since_last_claim", "claim_paid_ratio"
+    "total_policies",
+    "active_policies",
+    "inactive_policies",
+    "avg_annual_premium",
+    "total_annual_premium",
+    "avg_policy_age_days",
+    "max_policy_age_days",
+    "min_policy_age_days",
+    "policy_type_diversity",
+    "total_claims",
+    "open_claims",
+    "total_claimed_amount",
+    "total_paid_amount",
+    "avg_fraud_score",
+    "days_since_last_claim",
+    "claim_paid_ratio",
 ]
 
 for c in numeric_cols:
@@ -146,16 +163,20 @@ for c in numeric_cols:
         df_features = df_features.withColumn(c, F.coalesce(col(c), lit(0)))
 
 # Derived risk indicators
-df_features = df_features \
-    .withColumn("policy_per_claim_ratio", 
-                when(col("total_claims") > 0, col("total_policies") / col("total_claims")).otherwise(999)) \
-    .withColumn("has_open_claims", when(col("open_claims") > 0, 1).otherwise(0)) \
-    .withColumn("high_fraud_score", when(col("avg_fraud_score") > 0.5, 1).otherwise(0)) \
-    .withColumn("low_premium", when(col("avg_annual_premium") < 1000, 1).otherwise(0)) \
-    .withColumn("short_tenure", when(col("customer_tenure_months") < 12, 1).otherwise(0)) \
-    .withColumn("young_customer", when(col("age_years") < 30, 1).otherwise(0)) \
-    .withColumn("inactive_ratio", 
-                when(col("total_policies") > 0, col("inactive_policies") / col("total_policies")).otherwise(0))
+df_features = (
+    df_features.withColumn(
+        "policy_per_claim_ratio",
+        when(col("total_claims") > 0, col("total_policies") / col("total_claims")).otherwise(999),
+    )
+    .withColumn("has_open_claims", when(col("open_claims") > 0, 1).otherwise(0))
+    .withColumn("high_fraud_score", when(col("avg_fraud_score") > 0.5, 1).otherwise(0))
+    .withColumn("low_premium", when(col("avg_annual_premium") < 1000, 1).otherwise(0))
+    .withColumn("short_tenure", when(col("customer_tenure_months") < 12, 1).otherwise(0))
+    .withColumn("young_customer", when(col("age_years") < 30, 1).otherwise(0))
+    .withColumn(
+        "inactive_ratio", when(col("total_policies") > 0, col("inactive_policies") / col("total_policies")).otherwise(0)
+    )
+)
 
 print(f"✅ Feature engineering complete: {len(df_features.columns)} features")
 
@@ -186,26 +207,36 @@ print("🤖 Training churn prediction model...")
 
 # Select features for model
 feature_cols = [
-    "age_years", "customer_tenure_months", "credit_score_numeric",
-    "total_policies", "active_policies", "inactive_policies",
-    "avg_annual_premium", "total_annual_premium",
-    "avg_policy_age_days", "policy_type_diversity",
-    "total_claims", "open_claims", "total_claimed_amount", "total_paid_amount",
-    "avg_fraud_score", "days_since_last_claim", "claim_paid_ratio",
-    "policy_per_claim_ratio", "has_open_claims", "high_fraud_score",
-    "low_premium", "short_tenure", "young_customer", "inactive_ratio"
+    "age_years",
+    "customer_tenure_months",
+    "credit_score_numeric",
+    "total_policies",
+    "active_policies",
+    "inactive_policies",
+    "avg_annual_premium",
+    "total_annual_premium",
+    "avg_policy_age_days",
+    "policy_type_diversity",
+    "total_claims",
+    "open_claims",
+    "total_claimed_amount",
+    "total_paid_amount",
+    "avg_fraud_score",
+    "days_since_last_claim",
+    "claim_paid_ratio",
+    "policy_per_claim_ratio",
+    "has_open_claims",
+    "high_fraud_score",
+    "low_premium",
+    "short_tenure",
+    "young_customer",
+    "inactive_ratio",
 ]
 
 # Build ML pipeline
 assembler = VectorAssembler(inputCols=feature_cols, outputCol="features_raw")
 scaler = StandardScaler(inputCol="features_raw", outputCol="features")
-rf = RandomForestClassifier(
-    labelCol="churned",
-    featuresCol="features",
-    numTrees=100,
-    maxDepth=10,
-    seed=42
-)
+rf = RandomForestClassifier(labelCol="churned", featuresCol="features", numTrees=100, maxDepth=10, seed=42)
 
 pipeline = Pipeline(stages=[assembler, scaler, rf])
 
@@ -267,23 +298,22 @@ df_active_customers = df_features.filter(col("customer_status") == "Active")
 predictions = model.transform(df_active_customers)
 
 # Extract probability and create risk categories
-predictions = predictions.withColumn(
-    "churn_probability",
-    F.round(F.col("probability")[1] * 100, 2)
-).withColumn(
-    "churn_risk_category",
-    when(col("churn_probability") >= 70, "High Risk")
-    .when(col("churn_probability") >= 40, "Medium Risk")
-    .otherwise("Low Risk")
-).withColumn(
-    "recommended_action",
-    when(col("churn_probability") >= 70, "Immediate Retention Campaign")
-    .when(col("churn_probability") >= 40, "Proactive Engagement")
-    .otherwise("Monitor")
-).withColumn(
-    "prediction_date", current_date()
-).withColumn(
-    "prediction_window_days", lit(churn_window)
+predictions = (
+    predictions.withColumn("churn_probability", F.round(F.col("probability")[1] * 100, 2))
+    .withColumn(
+        "churn_risk_category",
+        when(col("churn_probability") >= 70, "High Risk")
+        .when(col("churn_probability") >= 40, "Medium Risk")
+        .otherwise("Low Risk"),
+    )
+    .withColumn(
+        "recommended_action",
+        when(col("churn_probability") >= 70, "Immediate Retention Campaign")
+        .when(col("churn_probability") >= 40, "Proactive Engagement")
+        .otherwise("Monitor"),
+    )
+    .withColumn("prediction_date", current_date())
+    .withColumn("prediction_window_days", lit(churn_window))
 )
 
 # Select final columns
@@ -303,7 +333,7 @@ final_predictions = predictions.select(
     "churn_risk_category",
     "recommended_action",
     "prediction_date",
-    "prediction_window_days"
+    "prediction_window_days",
 )
 
 print(f"✅ Generated predictions for {final_predictions.count():,} active customers")
@@ -325,17 +355,15 @@ spark.sql(f"CREATE SCHEMA IF NOT EXISTS {gold_catalog}.predictions")
 # Save predictions
 table_name = f"{gold_catalog}.predictions.customer_churn_risk"
 
-final_predictions.write \
-    .format("delta") \
-    .mode("overwrite") \
-    .option("overwriteSchema", "true") \
-    .saveAsTable(table_name)
+final_predictions.write.format("delta").mode("overwrite").option("overwriteSchema", "true").saveAsTable(table_name)
 
 print(f"✅ Predictions saved to: {table_name}")
 
 # Display sample
 print("\n📊 Sample High-Risk Customers:")
-display(final_predictions.filter(col("churn_risk_category") == "High Risk").orderBy(F.desc("churn_probability")).limit(10))
+display(
+    final_predictions.filter(col("churn_risk_category") == "High Risk").orderBy(F.desc("churn_probability")).limit(10)
+)
 
 # COMMAND ----------
 # MAGIC %md
@@ -346,11 +374,15 @@ print("=" * 70)
 print("📊 CHURN PREDICTION MODEL - SUMMARY")
 print("=" * 70)
 
-stats = final_predictions.groupBy("churn_risk_category").agg(
-    F.count("*").alias("customer_count"),
-    F.avg("churn_probability").alias("avg_churn_prob"),
-    F.sum("total_annual_premium").alias("premium_at_risk")
-).orderBy(F.desc("avg_churn_prob"))
+stats = (
+    final_predictions.groupBy("churn_risk_category")
+    .agg(
+        F.count("*").alias("customer_count"),
+        F.avg("churn_probability").alias("avg_churn_prob"),
+        F.sum("total_annual_premium").alias("premium_at_risk"),
+    )
+    .orderBy(F.desc("avg_churn_prob"))
+)
 
 stats_pd = stats.toPandas()
 
@@ -364,4 +396,3 @@ print("\n" + "=" * 70)
 print(f"✅ Model Performance: AUC-ROC = {auc:.3f}, F1 = {f1:.3f}")
 print(f"✅ Predictions saved to: {table_name}")
 print("=" * 70)
-

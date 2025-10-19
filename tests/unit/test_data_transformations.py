@@ -2,6 +2,7 @@
 Unit Tests for Data Transformation Logic
 Tests: 11-15
 """
+
 import pytest
 from decimal import Decimal
 from datetime import datetime, timedelta
@@ -66,4 +67,3 @@ class TestPolicyTransformations:
 
         assert full_name == "John Doe", "Name should be properly formatted"
         assert " " in full_name, "Full name should contain space"
-

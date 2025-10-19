@@ -1,19 +1,19 @@
 # Databricks notebook source
 # MAGIC %md
 # MAGIC # Run All ML Predictions - Master Orchestrator
-# MAGIC 
+# MAGIC
 # MAGIC **This notebook runs all 4 ML prediction models in sequence:**
 # MAGIC 1. 🔴 Customer Churn Prediction
 # MAGIC 2. 🚨 Enhanced Fraud Detection
 # MAGIC 3. 📈 Claim Volume Forecasting
 # MAGIC 4. 💰 Premium Optimization
-# MAGIC 
+# MAGIC
 # MAGIC **Total Expected Runtime: 15-30 minutes**
-# MAGIC 
+# MAGIC
 # MAGIC **Usage:**
 # MAGIC - Click "Run All" to execute all models
 # MAGIC - Or run cells individually to execute specific models
-# MAGIC 
+# MAGIC
 # MAGIC **Output:**
 # MAGIC - Updates all prediction tables in `insurance_dev_gold.predictions`
 # MAGIC - Displays summary statistics for each model
@@ -54,27 +54,27 @@ try:
     result = dbutils.notebook.run(
         "/Workspace/Shared/insurance-analytics/ml/predict_customer_churn",
         timeout_seconds=900,  # 15 minutes
-        arguments={}
+        arguments={},
     )
-    
+
     model1_duration = time.time() - model1_start
-    execution_results['churn_prediction'] = {
-        'status': 'SUCCESS',
-        'duration_seconds': round(model1_duration, 2),
-        'output': result
+    execution_results["churn_prediction"] = {
+        "status": "SUCCESS",
+        "duration_seconds": round(model1_duration, 2),
+        "output": result,
     }
-    
+
     print(f"✅ Churn Prediction Complete ({round(model1_duration, 1)}s)")
     print()
-    
+
 except Exception as e:
     model1_duration = time.time() - model1_start
-    execution_results['churn_prediction'] = {
-        'status': 'FAILED',
-        'duration_seconds': round(model1_duration, 2),
-        'error': str(e)
+    execution_results["churn_prediction"] = {
+        "status": "FAILED",
+        "duration_seconds": round(model1_duration, 2),
+        "error": str(e),
     }
-    
+
     print(f"❌ Churn Prediction Failed: {str(e)}")
     print()
 
@@ -93,27 +93,27 @@ try:
     result = dbutils.notebook.run(
         "/Workspace/Shared/insurance-analytics/ml/predict_fraud_enhanced",
         timeout_seconds=600,  # 10 minutes
-        arguments={}
+        arguments={},
     )
-    
+
     model2_duration = time.time() - model2_start
-    execution_results['fraud_detection'] = {
-        'status': 'SUCCESS',
-        'duration_seconds': round(model2_duration, 2),
-        'output': result
+    execution_results["fraud_detection"] = {
+        "status": "SUCCESS",
+        "duration_seconds": round(model2_duration, 2),
+        "output": result,
     }
-    
+
     print(f"✅ Fraud Detection Complete ({round(model2_duration, 1)}s)")
     print()
-    
+
 except Exception as e:
     model2_duration = time.time() - model2_start
-    execution_results['fraud_detection'] = {
-        'status': 'FAILED',
-        'duration_seconds': round(model2_duration, 2),
-        'error': str(e)
+    execution_results["fraud_detection"] = {
+        "status": "FAILED",
+        "duration_seconds": round(model2_duration, 2),
+        "error": str(e),
     }
-    
+
     print(f"❌ Fraud Detection Failed: {str(e)}")
     print()
 
@@ -130,29 +130,27 @@ model3_start = time.time()
 
 try:
     result = dbutils.notebook.run(
-        "/Workspace/Shared/insurance-analytics/ml/forecast_claims",
-        timeout_seconds=600,  # 10 minutes
-        arguments={}
+        "/Workspace/Shared/insurance-analytics/ml/forecast_claims", timeout_seconds=600, arguments={}  # 10 minutes
     )
-    
+
     model3_duration = time.time() - model3_start
-    execution_results['claim_forecasting'] = {
-        'status': 'SUCCESS',
-        'duration_seconds': round(model3_duration, 2),
-        'output': result
+    execution_results["claim_forecasting"] = {
+        "status": "SUCCESS",
+        "duration_seconds": round(model3_duration, 2),
+        "output": result,
     }
-    
+
     print(f"✅ Claim Forecasting Complete ({round(model3_duration, 1)}s)")
     print()
-    
+
 except Exception as e:
     model3_duration = time.time() - model3_start
-    execution_results['claim_forecasting'] = {
-        'status': 'FAILED',
-        'duration_seconds': round(model3_duration, 2),
-        'error': str(e)
+    execution_results["claim_forecasting"] = {
+        "status": "FAILED",
+        "duration_seconds": round(model3_duration, 2),
+        "error": str(e),
     }
-    
+
     print(f"❌ Claim Forecasting Failed: {str(e)}")
     print()
 
@@ -169,29 +167,27 @@ model4_start = time.time()
 
 try:
     result = dbutils.notebook.run(
-        "/Workspace/Shared/insurance-analytics/ml/optimize_premiums",
-        timeout_seconds=900,  # 15 minutes
-        arguments={}
+        "/Workspace/Shared/insurance-analytics/ml/optimize_premiums", timeout_seconds=900, arguments={}  # 15 minutes
     )
-    
+
     model4_duration = time.time() - model4_start
-    execution_results['premium_optimization'] = {
-        'status': 'SUCCESS',
-        'duration_seconds': round(model4_duration, 2),
-        'output': result
+    execution_results["premium_optimization"] = {
+        "status": "SUCCESS",
+        "duration_seconds": round(model4_duration, 2),
+        "output": result,
     }
-    
+
     print(f"✅ Premium Optimization Complete ({round(model4_duration, 1)}s)")
     print()
-    
+
 except Exception as e:
     model4_duration = time.time() - model4_start
-    execution_results['premium_optimization'] = {
-        'status': 'FAILED',
-        'duration_seconds': round(model4_duration, 2),
-        'error': str(e)
+    execution_results["premium_optimization"] = {
+        "status": "FAILED",
+        "duration_seconds": round(model4_duration, 2),
+        "error": str(e),
     }
-    
+
     print(f"❌ Premium Optimization Failed: {str(e)}")
     print()
 
@@ -211,21 +207,21 @@ print("=" * 70)
 print()
 
 # Count successes and failures
-success_count = sum(1 for r in execution_results.values() if r['status'] == 'SUCCESS')
-failure_count = sum(1 for r in execution_results.values() if r['status'] == 'FAILED')
+success_count = sum(1 for r in execution_results.values() if r["status"] == "SUCCESS")
+failure_count = sum(1 for r in execution_results.values() if r["status"] == "FAILED")
 
 print("📋 Model Execution Results:")
 print()
 
 for model_name, result in execution_results.items():
-    status_icon = "✅" if result['status'] == 'SUCCESS' else "❌"
+    status_icon = "✅" if result["status"] == "SUCCESS" else "❌"
     print(f"{status_icon} {model_name.replace('_', ' ').title()}")
     print(f"   Status: {result['status']}")
     print(f"   Duration: {result['duration_seconds']}s")
-    
-    if result['status'] == 'FAILED':
+
+    if result["status"] == "FAILED":
         print(f"   Error: {result.get('error', 'Unknown error')}")
-    
+
     print()
 
 print("=" * 70)
@@ -246,7 +242,7 @@ tables_to_check = [
     "insurance_dev_gold.predictions.customer_churn_risk",
     "insurance_dev_gold.predictions.fraud_alerts",
     "insurance_dev_gold.predictions.claim_forecast",
-    "insurance_dev_gold.predictions.premium_optimization"
+    "insurance_dev_gold.predictions.premium_optimization",
 ]
 
 table_stats = []
@@ -254,18 +250,10 @@ table_stats = []
 for table_name in tables_to_check:
     try:
         count = spark.table(table_name).count()
-        table_stats.append({
-            'table': table_name.split('.')[-1],
-            'status': '✅ Exists',
-            'row_count': f"{count:,}"
-        })
+        table_stats.append({"table": table_name.split(".")[-1], "status": "✅ Exists", "row_count": f"{count:,}"})
         print(f"✅ {table_name}: {count:,} rows")
     except Exception as e:
-        table_stats.append({
-            'table': table_name.split('.')[-1],
-            'status': '❌ Missing',
-            'row_count': 'N/A'
-        })
+        table_stats.append({"table": table_name.split(".")[-1], "status": "❌ Missing", "row_count": "N/A"})
         print(f"❌ {table_name}: Not found")
 
 print()
@@ -282,7 +270,8 @@ print()
 
 try:
     # Churn Summary
-    churn_summary = spark.sql("""
+    churn_summary = spark.sql(
+        """
         SELECT 
             churn_risk_category,
             COUNT(*) as customer_count,
@@ -290,8 +279,9 @@ try:
         FROM insurance_dev_gold.predictions.customer_churn_risk
         WHERE churn_risk_category = 'High Risk'
         GROUP BY churn_risk_category
-    """).collect()
-    
+    """
+    ).collect()
+
     if churn_summary:
         row = churn_summary[0]
         print(f"🔴 Customer Churn:")
@@ -304,14 +294,16 @@ except Exception as e:
 
 try:
     # Fraud Summary
-    fraud_summary = spark.sql("""
+    fraud_summary = spark.sql(
+        """
         SELECT 
             COUNT(*) as critical_cases,
             ROUND(SUM(estimated_fraud_amount), 2) as potential_fraud
         FROM insurance_dev_gold.predictions.fraud_alerts
         WHERE fraud_risk_category IN ('Critical', 'High')
-    """).collect()
-    
+    """
+    ).collect()
+
     if fraud_summary:
         row = fraud_summary[0]
         print(f"🚨 Fraud Detection:")
@@ -324,14 +316,16 @@ except Exception as e:
 
 try:
     # Forecast Summary
-    forecast_summary = spark.sql("""
+    forecast_summary = spark.sql(
+        """
         SELECT 
             ROUND(SUM(predicted_claim_count), 0) as forecast_30d_claims,
             ROUND(SUM(predicted_total_amount), 2) as forecast_30d_amount
         FROM insurance_dev_gold.predictions.claim_forecast
         WHERE claim_type = 'ALL_TYPES' AND days_ahead <= 30
-    """).collect()
-    
+    """
+    ).collect()
+
     if forecast_summary:
         row = forecast_summary[0]
         print(f"📈 Claim Forecast (30 Days):")
@@ -344,14 +338,16 @@ except Exception as e:
 
 try:
     # Premium Optimization Summary
-    pricing_summary = spark.sql("""
+    pricing_summary = spark.sql(
+        """
         SELECT 
             COUNT(*) as high_priority_count,
             ROUND(SUM(annual_revenue_impact), 2) as revenue_opportunity
         FROM insurance_dev_gold.predictions.premium_optimization
         WHERE implementation_priority = 'High'
-    """).collect()
-    
+    """
+    ).collect()
+
     if pricing_summary:
         row = pricing_summary[0]
         print(f"💰 Premium Optimization:")
@@ -394,7 +390,7 @@ print("=" * 70)
 # COMMAND ----------
 # MAGIC %md
 # MAGIC ## Pipeline Status
-# MAGIC 
+# MAGIC
 # MAGIC **Overall Status:** {0}/{1} models completed successfully
 
 # COMMAND ----------
@@ -407,4 +403,3 @@ else:
     print(f"✅ {success_count} model(s) completed successfully")
     print(f"Please review error messages above and re-run failed models")
     dbutils.notebook.exit(f"PARTIAL SUCCESS: {success_count}/{len(execution_results)} models completed")
-

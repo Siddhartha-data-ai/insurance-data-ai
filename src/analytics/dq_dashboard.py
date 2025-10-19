@@ -1,15 +1,15 @@
 # Databricks notebook source
 # MAGIC %md
 # MAGIC # 📊 Data Quality Monitoring Dashboard
-# MAGIC 
+# MAGIC
 # MAGIC **Real-Time Interactive Dashboard for Data Quality**
-# MAGIC 
+# MAGIC
 # MAGIC This Streamlit dashboard provides:
 # MAGIC - Real-time quality metrics across Bronze, Silver, Gold layers
 # MAGIC - Interactive visualizations and trend analysis
 # MAGIC - Alert system for quality threshold violations
 # MAGIC - Automated quality scoring and recommendations
-# MAGIC 
+# MAGIC
 # MAGIC **Deployment:** Streamlit app accessible via browser
 
 # COMMAND ----------
@@ -507,7 +507,7 @@ if auto_refresh:
 '''
 
 # Write the app to a file
-with open('/tmp/dq_dashboard_app.py', 'w') as f:
+with open("/tmp/dq_dashboard_app.py", "w") as f:
     f.write(streamlit_app_code)
 
 print("✅ Data Quality Dashboard app created at /tmp/dq_dashboard_app.py")
@@ -515,12 +515,12 @@ print("✅ Data Quality Dashboard app created at /tmp/dq_dashboard_app.py")
 # COMMAND ----------
 # MAGIC %md
 # MAGIC ## 🚀 Launch Dashboard
-# MAGIC 
+# MAGIC
 # MAGIC **Option 1: Run Locally**
 # MAGIC ```bash
 # MAGIC streamlit run /tmp/dq_dashboard_app.py --server.port 8502
 # MAGIC ```
-# MAGIC 
+# MAGIC
 # MAGIC **Option 2: Deploy in Databricks**
 # MAGIC - Upload this notebook to your Databricks workspace
 # MAGIC - Run all cells
@@ -528,7 +528,7 @@ print("✅ Data Quality Dashboard app created at /tmp/dq_dashboard_app.py")
 
 # COMMAND ----------
 # Create a launcher script
-launcher_script = '''#!/bin/bash
+launcher_script = """#!/bin/bash
 
 echo "🚀 Starting Data Quality Monitoring Dashboard..."
 echo "================================================="
@@ -545,12 +545,11 @@ echo "📊 Access dashboard at: http://localhost:8502"
 echo ""
 
 streamlit run /tmp/dq_dashboard_app.py --server.port 8502 --server.address 0.0.0.0
-'''
+"""
 
-with open('/tmp/launch_dq_dashboard.sh', 'w') as f:
+with open("/tmp/launch_dq_dashboard.sh", "w") as f:
     f.write(launcher_script)
 
 print("✅ Launcher script created at /tmp/launch_dq_dashboard.sh")
 print("\nTo launch the dashboard, run:")
 print("bash /tmp/launch_dq_dashboard.sh")
-

@@ -2,6 +2,7 @@
 Data Quality Tests using Great Expectations Patterns
 Tests: 19-20
 """
+
 import pytest
 from decimal import Decimal
 
@@ -41,9 +42,7 @@ class TestCustomerDataQuality:
     def test_claims_data_integrity(self, sample_claim_data, sample_policy_data):
         """Test 20: Validate claims data integrity and business rules"""
         # Test referential integrity
-        assert (
-            sample_claim_data["policy_id"] == sample_policy_data["policy_id"]
-        ), "Claim must reference valid policy"
+        assert sample_claim_data["policy_id"] == sample_policy_data["policy_id"], "Claim must reference valid policy"
 
         assert (
             sample_claim_data["customer_id"] == sample_policy_data["customer_id"]
@@ -69,4 +68,3 @@ class TestCustomerDataQuality:
         # Test status values
         valid_statuses = ["Pending", "Approved", "Denied", "Under Review", "Paid"]
         assert sample_claim_data["claim_status"] in valid_statuses, "Claim status must be valid"
-

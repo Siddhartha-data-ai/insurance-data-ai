@@ -1,7 +1,7 @@
 # Databricks notebook source
 # MAGIC %md
 # MAGIC # Check Prerequisites for ML Notebooks
-# MAGIC 
+# MAGIC
 # MAGIC **This notebook verifies all required source tables exist before running ML predictions**
 
 # COMMAND ----------
@@ -17,21 +17,19 @@ requirements = {
     "Churn Prediction": [
         "insurance_dev_silver.customers.customer_dim",
         "insurance_dev_silver.policies.policy_dim",
-        "insurance_dev_silver.claims.claim_fact"
+        "insurance_dev_silver.claims.claim_fact",
     ],
     "Fraud Detection": [
         "insurance_dev_silver.customers.customer_dim",
         "insurance_dev_silver.policies.policy_dim",
-        "insurance_dev_silver.claims.claim_fact"
+        "insurance_dev_silver.claims.claim_fact",
     ],
-    "Claim Forecasting": [
-        "insurance_dev_silver.claims.claim_fact"
-    ],
+    "Claim Forecasting": ["insurance_dev_silver.claims.claim_fact"],
     "Premium Optimization": [
         "insurance_dev_silver.customers.customer_dim",
         "insurance_dev_silver.policies.policy_dim",
-        "insurance_dev_silver.claims.claim_fact"
-    ]
+        "insurance_dev_silver.claims.claim_fact",
+    ],
 }
 
 # Check each model's requirements
@@ -40,9 +38,9 @@ results = {}
 for model_name, tables in requirements.items():
     print(f"📊 {model_name}")
     print("-" * 70)
-    
+
     model_ok = True
-    
+
     for table in tables:
         try:
             count = spark.table(table).count()
@@ -51,7 +49,7 @@ for model_name, tables in requirements.items():
             print(f"   ❌ {table}: NOT FOUND")
             print(f"      Error: {str(e)[:100]}")
             model_ok = False
-    
+
     results[model_name] = model_ok
     print()
 
@@ -76,7 +74,7 @@ print("-" * 70)
 
 optional_tables = [
     "insurance_dev_gold.customer_analytics.customer_360",
-    "insurance_dev_gold.claims_analytics.claims_fraud_detection"
+    "insurance_dev_gold.claims_analytics.claims_fraud_detection",
 ]
 
 for table in optional_tables:
@@ -107,7 +105,7 @@ if all_ready:
 else:
     print("⚠️  Some tables are missing. Here's what to do:")
     print()
-    
+
     if not results.get("Churn Prediction", True):
         print("For Churn Prediction:")
         print("   1. Run: /Workspace/Shared/insurance-analytics/bronze/generate_customers_data")
@@ -115,12 +113,12 @@ else:
         print("   3. Run: /Workspace/Shared/insurance-analytics/bronze/generate_claims_data")
         print("   4. Run: /Workspace/Shared/insurance-analytics/transformations/transform_bronze_to_silver")
         print()
-    
+
     if not results.get("Fraud Detection", True):
         print("For Fraud Detection:")
         print("   Same as above - needs silver layer tables")
         print()
-    
+
     if not results.get("Claim Forecasting", True):
         print("For Claim Forecasting:")
         print("   1. Run: /Workspace/Shared/insurance-analytics/bronze/generate_claims_data")
@@ -128,4 +126,3 @@ else:
         print()
 
 print("=" * 70)
-

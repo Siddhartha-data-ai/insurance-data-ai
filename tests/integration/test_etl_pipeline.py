@@ -2,6 +2,7 @@
 Integration Tests for Insurance ETL Pipeline
 Tests: 16-18
 """
+
 import pytest
 from decimal import Decimal
 from datetime import datetime
@@ -19,9 +20,7 @@ class TestInsuranceETLPipeline:
             ("CUST002", "jane smith", "jane.smith@email.com", "555-987-6543", "1990-05-15"),
         ]
 
-        bronze_df = spark_session.createDataFrame(
-            bronze_data, ["customer_id", "name", "email", "phone", "dob"]
-        )
+        bronze_df = spark_session.createDataFrame(bronze_data, ["customer_id", "name", "email", "phone", "dob"])
 
         # Apply silver transformation logic
         from pyspark.sql.functions import col, lower, trim, regexp_replace
@@ -104,4 +103,3 @@ class TestInsuranceETLPipeline:
         assert result[0]["claims_ratio"] == pytest.approx(0.67, 0.01), "Claims ratio should be ~0.67"
         assert result[1]["claims_ratio"] == 0.0, "Claims ratio should be 0 for no claims"
         assert result[0]["total_policies"] == 3, "Should have 3 policies"
-

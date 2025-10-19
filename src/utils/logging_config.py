@@ -145,9 +145,7 @@ def log_execution_time(logger: Optional[StructuredLogger] = None):
             start_time = datetime.utcnow()
             function_name = func.__name__
 
-            _logger.info(
-                f"Starting execution: {function_name}", function=function_name, event="function_start"
-            )
+            _logger.info(f"Starting execution: {function_name}", function=function_name, event="function_start")
 
             try:
                 result = func(*args, **kwargs)
@@ -197,9 +195,7 @@ if __name__ == "__main__":
     # Log messages
     logger.info("Starting ETL pipeline", pipeline="bronze_to_silver", table="customers")
 
-    logger.warning(
-        "Data quality issue detected", table="customers_raw", issue="null_values", count=15
-    )
+    logger.warning("Data quality issue detected", table="customers_raw", issue="null_values", count=15)
 
     try:
         # Simulate error
@@ -217,4 +213,3 @@ if __name__ == "__main__":
         return "done"
 
     process_data()
-

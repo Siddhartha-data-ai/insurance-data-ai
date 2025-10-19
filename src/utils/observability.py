@@ -196,9 +196,7 @@ class PerformanceMonitor:
     def __init__(self):
         self.metrics: Dict[str, list] = {}
 
-    def record_metric(
-        self, metric_name: str, value: float, unit: str = "ms", **labels: Dict[str, str]
-    ):
+    def record_metric(self, metric_name: str, value: float, unit: str = "ms", **labels: Dict[str, str]):
         """
         Record a performance metric
 
@@ -295,12 +293,9 @@ if __name__ == "__main__":
     # Performance monitoring example
     monitor = get_performance_monitor()
 
-    monitor.record_metric(
-        "query_duration", 150.5, unit="ms", table="customers", operation="read"
-    )
+    monitor.record_metric("query_duration", 150.5, unit="ms", table="customers", operation="read")
     monitor.record_metric("query_duration", 200.3, unit="ms", table="policies", operation="read")
     monitor.record_metric("rows_processed", 10000, unit="count", pipeline="bronze_to_silver")
 
     print("\n=== Performance Metrics ===")
     print(json.dumps(monitor.get_all_metrics(), indent=2))
-

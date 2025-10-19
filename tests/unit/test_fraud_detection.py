@@ -2,6 +2,7 @@
 Unit Tests for Claims Fraud Detection Logic
 Tests: 1-7
 """
+
 import pytest
 from decimal import Decimal
 from datetime import datetime, timedelta
@@ -124,4 +125,3 @@ class TestFraudDataValidation:
 
         for score in confidence_scores:
             assert 0.0 <= score <= 1.0, f"Confidence score {score} out of range"
-

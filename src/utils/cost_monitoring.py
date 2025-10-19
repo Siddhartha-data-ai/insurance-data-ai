@@ -243,16 +243,13 @@ class CostMonitor:
             "period_days": days,
             "total_cost_usd": round(total_cost, 2),
             "cost_by_resource_type": {
-                k: {**v, "total_cost_usd": round(v["total_cost_usd"], 2)}
-                for k, v in cost_by_type.items()
+                k: {**v, "total_cost_usd": round(v["total_cost_usd"], 2)} for k, v in cost_by_type.items()
             },
             "estimated_monthly_cost_usd": round(total_cost * (30 / days), 2),
             "record_count": len(recent_costs),
         }
 
-    def get_optimization_recommendations(
-        self, limit: int = 10
-    ) -> List[Dict[str, str]]:
+    def get_optimization_recommendations(self, limit: int = 10) -> List[Dict[str, str]]:
         """
         Get top cost optimization recommendations
 
@@ -374,4 +371,3 @@ if __name__ == "__main__":
 
     print("\n=== SAVINGS ESTIMATE ===")
     print(json.dumps(monitor.estimate_savings(), indent=2))
-

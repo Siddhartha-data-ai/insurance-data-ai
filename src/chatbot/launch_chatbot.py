@@ -1,15 +1,15 @@
 # Databricks notebook source
 # MAGIC %md
 # MAGIC # 🤖 Insurance Analytics AI Chatbot Launcher
-# MAGIC 
+# MAGIC
 # MAGIC **This notebook launches your AI-powered analytics chatbot!**
-# MAGIC 
+# MAGIC
 # MAGIC **Features:**
 # MAGIC - Natural language queries
 # MAGIC - Auto-generated visualizations
 # MAGIC - Quick Actions for common insights
 # MAGIC - Conversational interface
-# MAGIC 
+# MAGIC
 # MAGIC **Just click "Run All" to start!**
 
 # COMMAND ----------
@@ -18,7 +18,7 @@
 
 # COMMAND ----------
 print("📦 Installing required packages...")
-%pip install streamlit plotly --quiet
+# %pip install streamlit plotly --quiet  # Databricks magic command - run in notebook
 print("✅ Packages installed successfully!")
 print("🔄 Restarting Python kernel to use new packages...")
 
@@ -29,12 +29,12 @@ dbutils.library.restartPython()
 # COMMAND ----------
 # MAGIC %md
 # MAGIC ## Step 2: Launch the Chatbot
-# MAGIC 
+# MAGIC
 # MAGIC The chatbot will start in the cell below. You can interact with it directly!
 
 # COMMAND ----------
 print("🚀 Launching Insurance Analytics AI Chatbot...")
-print("="*70)
+print("=" * 70)
 print()
 
 # Import the main chatbot app
@@ -46,20 +46,20 @@ notebook_path = os.path.dirname(dbutils.notebook.entry_point.getDbutils().notebo
 sys.path.insert(0, notebook_path)
 
 # Launch the chatbot
-exec(open('insurance_chatbot.py').read())
+exec(open("insurance_chatbot.py").read())
 
 # COMMAND ----------
 # MAGIC %md
 # MAGIC ## 💡 How to Use the Chatbot
-# MAGIC 
+# MAGIC
 # MAGIC ### Quick Actions (Sidebar)
 # MAGIC Click any button to instantly get insights:
 # MAGIC - 📊 Executive Summary
-# MAGIC - 🔴 High Risk Customers  
+# MAGIC - 🔴 High Risk Customers
 # MAGIC - 🚨 Critical Fraud Cases
 # MAGIC - 📈 30-Day Forecast
 # MAGIC - 💰 Pricing Opportunities
-# MAGIC 
+# MAGIC
 # MAGIC ### Natural Language Queries
 # MAGIC Type questions like:
 # MAGIC - "Show me customers at risk"
@@ -67,7 +67,7 @@ exec(open('insurance_chatbot.py').read())
 # MAGIC - "Forecast next week's claims"
 # MAGIC - "Which policies should we reprice?"
 # MAGIC - "Show me top 20 high-risk customers"
-# MAGIC 
+# MAGIC
 # MAGIC ### Understanding Responses
 # MAGIC Each response includes:
 # MAGIC 1. **Text Summary** - AI-generated insights
@@ -77,7 +77,7 @@ exec(open('insurance_chatbot.py').read())
 # COMMAND ----------
 # MAGIC %md
 # MAGIC ## 🔄 Troubleshooting
-# MAGIC 
+# MAGIC
 # MAGIC **If the chatbot doesn't start:**
 # MAGIC 1. Make sure all prediction tables exist:
 # MAGIC    ```sql
@@ -85,10 +85,9 @@ exec(open('insurance_chatbot.py').read())
 # MAGIC    ```
 # MAGIC 2. Verify your cluster is running
 # MAGIC 3. Re-run all cells above
-# MAGIC 
+# MAGIC
 # MAGIC **If queries fail:**
 # MAGIC - Check that ML prediction notebooks have completed successfully
 # MAGIC - Verify table names match your catalogs
-# MAGIC 
+# MAGIC
 # MAGIC **Need help?** Check the `CHATBOT_DEPLOYMENT_GUIDE.md` in your project root!
-

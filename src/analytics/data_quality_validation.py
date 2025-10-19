@@ -8,15 +8,24 @@ from pyspark.sql import functions as F
 
 # COMMAND ----------
 # Create widgets for parameters
-dbutils.widgets.dropdown("bronze_catalog", "insurance_dev_bronze", 
-                         ["insurance_dev_bronze", "insurance_staging_bronze", "insurance_prod_bronze"], 
-                         "Bronze Catalog Name")
-dbutils.widgets.dropdown("silver_catalog", "insurance_dev_silver", 
-                         ["insurance_dev_silver", "insurance_staging_silver", "insurance_prod_silver"], 
-                         "Silver Catalog Name")
-dbutils.widgets.dropdown("gold_catalog", "insurance_dev_gold", 
-                         ["insurance_dev_gold", "insurance_staging_gold", "insurance_prod_gold"], 
-                         "Gold Catalog Name")
+dbutils.widgets.dropdown(
+    "bronze_catalog",
+    "insurance_dev_bronze",
+    ["insurance_dev_bronze", "insurance_staging_bronze", "insurance_prod_bronze"],
+    "Bronze Catalog Name",
+)
+dbutils.widgets.dropdown(
+    "silver_catalog",
+    "insurance_dev_silver",
+    ["insurance_dev_silver", "insurance_staging_silver", "insurance_prod_silver"],
+    "Silver Catalog Name",
+)
+dbutils.widgets.dropdown(
+    "gold_catalog",
+    "insurance_dev_gold",
+    ["insurance_dev_gold", "insurance_staging_gold", "insurance_prod_gold"],
+    "Gold Catalog Name",
+)
 
 # Get widget values
 bronze_catalog = dbutils.widgets.get("bronze_catalog")
@@ -99,7 +108,8 @@ print("DATA QUALITY METRICS")
 print("=" * 60)
 
 # Check for nulls in critical fields
-null_checks = spark.sql(f"""
+null_checks = spark.sql(
+    f"""
     SELECT 
         'Customers' as table_name,
         COUNT(*) - COUNT(customer_id) as null_customer_id,
@@ -113,7 +123,8 @@ null_checks = spark.sql(f"""
         COUNT(*) - COUNT(customer_id) as null_customer_id,
         COUNT(*) - COUNT(annual_premium) as null_premium
     FROM {bronze_catalog}.policies.policy_raw
-""")
+"""
+)
 
 null_checks.show(truncate=False)
 
@@ -127,22 +138,26 @@ print("REFERENTIAL INTEGRITY CHECKS")
 print("=" * 60)
 
 # Policies referencing non-existent customers
-orphan_policies = spark.sql(f"""
+orphan_policies = spark.sql(
+    f"""
     SELECT COUNT(*) as orphan_count
     FROM {bronze_catalog}.policies.policy_raw p
     LEFT JOIN {bronze_catalog}.customers.customer_raw c ON p.customer_id = c.customer_id
     WHERE c.customer_id IS NULL
-""").collect()[0]['orphan_count']
+"""
+).collect()[0]["orphan_count"]
 
 print(f"{'✅' if orphan_policies == 0 else '❌'} Orphan Policies: {orphan_policies}")
 
 # Claims referencing non-existent policies
-orphan_claims = spark.sql(f"""
+orphan_claims = spark.sql(
+    f"""
     SELECT COUNT(*) as orphan_count
     FROM {bronze_catalog}.claims.claim_raw cl
     LEFT JOIN {bronze_catalog}.policies.policy_raw p ON cl.policy_id = p.policy_id
     WHERE p.policy_id IS NULL
-""").collect()[0]['orphan_count']
+"""
+).collect()[0]["orphan_count"]
 
 print(f"{'✅' if orphan_claims == 0 else '❌'} Orphan Claims: {orphan_claims}")
 
@@ -154,4 +169,3 @@ print("=" * 60)
 # COMMAND ----------
 # Return success
 dbutils.notebook.exit("SUCCESS")
-

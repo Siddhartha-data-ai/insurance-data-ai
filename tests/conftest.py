@@ -1,6 +1,7 @@
 """
 Pytest Configuration and Shared Fixtures
 """
+
 import os
 import pytest
 from datetime import datetime, timedelta
@@ -116,4 +117,3 @@ def mock_env_vars(monkeypatch):
     monkeypatch.setenv("DATABRICKS_TOKEN", "test_token")
     monkeypatch.setenv("CATALOG_NAME", "insurance_test")
     monkeypatch.setenv("ENVIRONMENT", "test")
-
