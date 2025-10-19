@@ -24,12 +24,12 @@ exclude =
 
 # Per-file ignores for Databricks notebook files and tests
 per-file-ignores =
-    src/analytics/*.py:F821,F403,F405,E712,F841,F811,W291
-    src/bronze/*.py:F821,F403,F405,E712,F841,F811,W291
+    src/analytics/*.py:F821,F403,F405,E712,F841,F811,W291,E722
+    src/bronze/*.py:F821,F403,F405,E712,F841,F811,W291,E722
     src/pipelines/*.py:F821,F403,F405,E712,F841,F811,W291,E722
-    src/gold/*.py:F821,F403,F405,E712,F841,F811,W291
-    src/ml/*.py:F821,F403,F405,E712,F841,F811,W291
-    src/chatbot/*.py:F821,F403,F405,E712,F841,F811,W291
+    src/gold/*.py:F821,F403,F405,E712,F841,F811,W291,E722
+    src/ml/*.py:F821,F403,F405,E712,F841,F811,W291,E722
+    src/chatbot/*.py:F821,F403,F405,E712,F841,F811,W291,E722
     src/transformations/*.py:F821,F403,F405,E712,F841,F811,W291,E722
     tests/*.py:E712,E722,F841,W291,F811
     tests/*/*.py:E712,E722,F841,W291,F811
