@@ -1,0 +1,26 @@
+# Testing Dependencies
+pytest==7.4.3
+pytest-cov==4.1.0
+pytest-xdist==3.5.0
+pytest-mock==3.12.0
+
+# Data Testing
+great-expectations==0.18.8
+pandas==2.1.4
+numpy==1.26.2
+
+# Code Quality
+black==23.12.1
+flake8==7.0.0
+pylint==3.0.3
+isort==5.13.2
+mypy==1.8.0
+
+# Security
+bandit==1.7.6
+safety==3.0.1
+
+# Additional Testing Tools
+faker==22.0.0
+hypothesis==6.92.2
+

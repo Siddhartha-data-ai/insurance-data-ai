@@ -1,0 +1,41 @@
+[flake8]
+# Maximum line length
+max-line-length = 120
+
+# Maximum complexity
+max-complexity = 15
+
+# Ignore specific errors/warnings
+ignore = 
+    E203,  # Whitespace before ':'
+    E501,  # Line too long (handled by black)
+    W503,  # Line break before binary operator
+    E402,  # Module level import not at top of file
+    F401,  # Module imported but unused (in __init__.py files)
+    
+# Exclude directories
+exclude =
+    .git,
+    __pycache__,
+    .databricks,
+    .venv,
+    venv,
+    build,
+    dist,
+    *.egg-info,
+    .pytest_cache,
+    .mypy_cache,
+    notebooks/.ipynb_checkpoints
+
+# File patterns to check
+filename = *.py
+
+# Show source code for each error
+show-source = True
+
+# Show statistics
+statistics = True
+
+# Count errors
+count = True
+
