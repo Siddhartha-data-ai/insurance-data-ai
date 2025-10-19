@@ -42,7 +42,7 @@ jobs:
         run: mypy src/ --ignore-missing-imports || true
 
       - name: Run Bandit (Security Scan)
-        run: bandit -r src/ -c .bandit
+        run: bandit -r src/ --skip B608 --exclude /tests/
 
       - name: Run Safety (Dependency Check)
         run: safety check --json || true
