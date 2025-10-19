@@ -3,12 +3,13 @@
 # MAGIC # Generate Realistic Customer Data
 # MAGIC Generate 1 million+ customer records with realistic distributions
 
+import random
+from datetime import datetime, timedelta
+
 # COMMAND ----------
 from pyspark.sql import functions as F
-from pyspark.sql.functions import col, lit, when, concat, lpad, array, element_at, date_add
+from pyspark.sql.functions import array, col, concat, date_add, element_at, lit, lpad, when
 from pyspark.sql.types import *
-from datetime import datetime, timedelta
-import random
 
 # COMMAND ----------
 # MAGIC %md
@@ -198,7 +199,7 @@ last_names = [
 # MAGIC ## Generate Data Using Spark
 
 # COMMAND ----------
-from pyspark.sql.functions import udf, col, lit, expr, when, concat, lpad, date_add, array, element_at
+from pyspark.sql.functions import array, col, concat, date_add, element_at, expr, lit, lpad, udf, when
 
 # Create base customer IDs
 df_base = spark.range(0, NUM_CUSTOMERS).withColumn("customer_id", concat(lit("CUST"), lpad(col("id"), 10, "0")))

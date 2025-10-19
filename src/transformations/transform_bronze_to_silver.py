@@ -5,12 +5,13 @@
 # MAGIC
 # MAGIC **Community Edition Compatible** - Uses standard PySpark Delta merge operations
 
+from delta.tables import DeltaTable
+
 # COMMAND ----------
 from pyspark.sql import functions as F
-from pyspark.sql.functions import col, lit, when, concat, current_date, current_timestamp
-from pyspark.sql.window import Window
+from pyspark.sql.functions import col, concat, current_date, current_timestamp, lit, when
 from pyspark.sql.types import *
-from delta.tables import DeltaTable
+from pyspark.sql.window import Window
 
 # COMMAND ----------
 # MAGIC %md

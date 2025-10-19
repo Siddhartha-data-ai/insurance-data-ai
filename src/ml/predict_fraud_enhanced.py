@@ -13,15 +13,16 @@
 # MAGIC
 # MAGIC **Output:** Enhanced fraud score, confidence level, and investigation priority
 
+import pandas as pd
+from pyspark.ml import Pipeline
+from pyspark.ml.classification import RandomForestClassifier
+from pyspark.ml.evaluation import BinaryClassificationEvaluator
+from pyspark.ml.feature import StandardScaler, VectorAssembler
+
 # COMMAND ----------
 from pyspark.sql import functions as F
-from pyspark.sql.functions import col, lit, when, datediff, current_date
+from pyspark.sql.functions import col, current_date, datediff, lit, when
 from pyspark.sql.window import Window
-from pyspark.ml.feature import VectorAssembler, StandardScaler
-from pyspark.ml.classification import RandomForestClassifier
-from pyspark.ml import Pipeline
-from pyspark.ml.evaluation import BinaryClassificationEvaluator
-import pandas as pd
 
 # COMMAND ----------
 # MAGIC %md

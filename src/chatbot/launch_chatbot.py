@@ -37,9 +37,10 @@ print("🚀 Launching Insurance Analytics AI Chatbot...")
 print("=" * 70)
 print()
 
+import os
+
 # Import the main chatbot app
 import sys
-import os
 
 # Get the directory of this notebook
 notebook_path = os.path.dirname(dbutils.notebook.entry_point.getDbutils().notebook().getContext().notebookPath().get())

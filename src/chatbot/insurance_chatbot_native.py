@@ -89,15 +89,17 @@ print("👆 Use Quick Actions dropdown or type your question above")
 # MAGIC - "Forecast claims for next 30 days"
 # MAGIC - "Compare churn by customer segment"
 
+import re
+
+import pandas as pd
+import plotly.express as px
+import plotly.graph_objects as go
+from IPython.display import HTML, display
+
 # COMMAND ----------
 # Import required libraries
 from pyspark.sql import functions as F
 from pyspark.sql.functions import col, lit, when
-import pandas as pd
-import plotly.express as px
-import plotly.graph_objects as go
-from IPython.display import display, HTML
-import re
 
 print("📦 Libraries loaded successfully!")
 

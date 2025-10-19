@@ -9,12 +9,13 @@ Features:
 - Quick Actions for common queries
 """
 
-import streamlit as st
+import re
+from datetime import datetime
+
 import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
-from datetime import datetime
-import re
+import streamlit as st
 
 # Configure Streamlit page
 st.set_page_config(page_title="Insurance Analytics AI", page_icon="🤖", layout="wide", initial_sidebar_state="expanded")

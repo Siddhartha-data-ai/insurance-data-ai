@@ -3,9 +3,10 @@
 # MAGIC # Pipeline Completion Report
 # MAGIC Generates and sends completion report for ETL pipeline execution
 
+from datetime import datetime
+
 # COMMAND ----------
 from pyspark.sql import functions as F
-from datetime import datetime
 
 # COMMAND ----------
 # Create widgets for parameters

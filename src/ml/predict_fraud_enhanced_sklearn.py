@@ -6,16 +6,17 @@
 # MAGIC
 # MAGIC **ML-powered fraud detection to identify suspicious claims**
 
+import numpy as np
+import pandas as pd
+
 # COMMAND ----------
 from pyspark.sql import functions as F
-from pyspark.sql.functions import col, lit, when, datediff, current_date, concat, lpad
+from pyspark.sql.functions import col, concat, current_date, datediff, lit, lpad, when
 from pyspark.sql.window import Window
-import pandas as pd
-import numpy as np
 from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import confusion_matrix, f1_score, precision_score, recall_score, roc_auc_score
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
-from sklearn.metrics import roc_auc_score, precision_score, recall_score, f1_score, confusion_matrix
 
 # COMMAND ----------
 # MAGIC %md

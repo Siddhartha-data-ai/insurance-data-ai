@@ -3,8 +3,9 @@ Data Quality Tests using Great Expectations Patterns
 Tests: 19-20
 """
 
-import pytest
 from decimal import Decimal
+
+import pytest
 
 
 @pytest.mark.data_quality

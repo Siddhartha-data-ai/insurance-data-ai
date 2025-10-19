@@ -3,11 +3,12 @@
 # MAGIC # Generate Realistic Policy Data
 # MAGIC Generate 2-3 million policy records with realistic relationships to customers
 
+from datetime import datetime, timedelta
+
 # COMMAND ----------
 from pyspark.sql import functions as F
-from pyspark.sql.functions import col, lit, when, concat, lpad, array, element_at, date_add
+from pyspark.sql.functions import array, col, concat, date_add, element_at, lit, lpad, when
 from pyspark.sql.types import *
-from datetime import datetime, timedelta
 
 # COMMAND ----------
 # MAGIC %md
@@ -46,17 +47,17 @@ print(f"Loaded {num_customers:,} customers")
 
 # COMMAND ----------
 from pyspark.sql.functions import (
-    col,
-    lit,
-    expr,
-    when,
-    concat,
-    lpad,
-    date_add,
     array,
-    element_at,
-    months_between,
+    col,
+    concat,
+    date_add,
     datediff,
+    element_at,
+    expr,
+    lit,
+    lpad,
+    months_between,
+    when,
 )
 
 # Create policy records (some customers have multiple policies)

@@ -13,12 +13,15 @@
 # MAGIC
 # MAGIC **Output:** Recommended premiums, revenue impact, and implementation priority
 
+import numpy as np
+import pandas as pd
+
 # COMMAND ----------
 from pyspark.sql import functions as F
-from pyspark.sql.functions import col, lit, when, round as spark_round, current_date
+from pyspark.sql.functions import col, current_date, lit
+from pyspark.sql.functions import round as spark_round
+from pyspark.sql.functions import when
 from pyspark.sql.window import Window
-import pandas as pd
-import numpy as np
 
 # COMMAND ----------
 # MAGIC %md

@@ -15,15 +15,16 @@
 # MAGIC
 # MAGIC **Output:** Churn probability, risk category, and recommended actions
 
+import numpy as np
+import pandas as pd
+
 # COMMAND ----------
 from pyspark.sql import functions as F
-from pyspark.sql.functions import col, lit, when, datediff, current_date
-import pandas as pd
-import numpy as np
+from pyspark.sql.functions import col, current_date, datediff, lit, when
 from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import confusion_matrix, f1_score, precision_score, recall_score, roc_auc_score
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
-from sklearn.metrics import roc_auc_score, precision_score, recall_score, f1_score, confusion_matrix
 
 # COMMAND ----------
 # MAGIC %md

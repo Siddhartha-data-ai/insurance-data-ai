@@ -3,11 +3,12 @@
 # MAGIC # Generate Realistic Claims Data
 # MAGIC Generate claims with realistic patterns, fraud indicators, and financial metrics
 
+from datetime import datetime, timedelta
+
 # COMMAND ----------
 from pyspark.sql import functions as F
-from pyspark.sql.functions import col, lit, when, concat, lpad, array, element_at, date_add, current_date
+from pyspark.sql.functions import array, col, concat, current_date, date_add, element_at, lit, lpad, when
 from pyspark.sql.types import *
-from datetime import datetime, timedelta
 
 # COMMAND ----------
 # Create widgets for parameters

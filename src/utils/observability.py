@@ -3,11 +3,11 @@ OpenTelemetry Distributed Tracing
 End-to-end request tracing for insurance data platform
 """
 
-from typing import Any, Callable, Dict, Optional
-from functools import wraps
-from datetime import datetime
-import time
 import json
+import time
+from datetime import datetime
+from functools import wraps
+from typing import Any, Callable, Dict, Optional
 
 
 class TracingContext:

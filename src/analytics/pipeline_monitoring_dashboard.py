@@ -17,15 +17,17 @@
 # MAGIC %md
 # MAGIC ## ⚙️ Configuration
 
-# COMMAND ----------
-import requests
 import json
 from datetime import datetime, timedelta
+
 import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
+
+# COMMAND ----------
+import requests
+from IPython.display import HTML, display
 from plotly.subplots import make_subplots
-from IPython.display import display, HTML
 
 # Configuration
 dbutils.widgets.dropdown("environment", "dev", ["dev", "staging", "prod"], "📊 Environment")

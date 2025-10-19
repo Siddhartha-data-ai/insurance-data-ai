@@ -3,9 +3,10 @@ Unit Tests for Claims Fraud Detection Logic
 Tests: 1-7
 """
 
-import pytest
-from decimal import Decimal
 from datetime import datetime, timedelta
+from decimal import Decimal
+
+import pytest
 
 
 class TestFraudDetectionLogic:

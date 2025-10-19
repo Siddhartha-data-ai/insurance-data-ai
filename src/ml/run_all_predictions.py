@@ -23,9 +23,10 @@
 # MAGIC %md
 # MAGIC ## Configuration
 
+import time
+
 # COMMAND ----------
 from datetime import datetime
-import time
 
 # Track execution
 start_time = time.time()

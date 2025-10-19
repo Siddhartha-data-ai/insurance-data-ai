@@ -7,10 +7,10 @@ import json
 import logging
 import sys
 import traceback
-from datetime import datetime
-from typing import Any, Dict, Optional
-from functools import wraps
 import uuid
+from datetime import datetime
+from functools import wraps
+from typing import Any, Dict, Optional
 
 
 class StructuredLogger:

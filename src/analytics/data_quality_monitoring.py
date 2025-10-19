@@ -16,15 +16,17 @@
 # MAGIC %md
 # MAGIC ## ⚙️ Configuration
 
-# COMMAND ----------
-# Import libraries
-from pyspark.sql import functions as F
-from pyspark.sql.functions import col, count, when, isnan, lit, current_timestamp
 from datetime import datetime, timedelta
+
 import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
-from IPython.display import display, HTML
+from IPython.display import HTML, display
+
+# COMMAND ----------
+# Import libraries
+from pyspark.sql import functions as F
+from pyspark.sql.functions import col, count, current_timestamp, isnan, lit, when
 
 # Configuration
 dbutils.widgets.dropdown(

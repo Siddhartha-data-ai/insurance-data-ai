@@ -3,13 +3,16 @@ Integration Tests for Insurance ETL Pipeline
 Tests: 16-18
 """
 
-import pytest
-from decimal import Decimal
 from datetime import datetime
+from decimal import Decimal
+
+import pytest
 
 # PySpark imports for integration tests
 try:
-    from pyspark.sql.functions import col, when, round as spark_round
+    from pyspark.sql.functions import col
+    from pyspark.sql.functions import round as spark_round
+    from pyspark.sql.functions import when
 except ImportError:
     # Mock for environments without PySpark
     col = None
@@ -32,7 +35,7 @@ class TestInsuranceETLPipeline:
         bronze_df = spark_session.createDataFrame(bronze_data, ["customer_id", "name", "email", "phone", "dob"])
 
         # Apply silver transformation logic
-        from pyspark.sql.functions import col, lower, trim, regexp_replace
+        from pyspark.sql.functions import col, lower, regexp_replace, trim
 
         silver_df = bronze_df.select(
             col("customer_id"),

@@ -16,26 +16,28 @@
 # MAGIC %md
 # MAGIC ## ⚙️ Configuration
 
+import json
+from datetime import datetime, timedelta
+
+import pandas as pd
+import plotly.express as px
+import plotly.graph_objects as go
+from IPython.display import HTML, display
+from plotly.subplots import make_subplots
+
 # COMMAND ----------
 # Import libraries
 from pyspark.sql import functions as F
 from pyspark.sql.functions import (
-    col,
-    sum as spark_sum,
-    count,
     avg,
-    max as spark_max,
-    min as spark_min,
-    round as spark_round,
+    col,
+    count,
     current_timestamp,
 )
-from datetime import datetime, timedelta
-import pandas as pd
-import plotly.express as px
-import plotly.graph_objects as go
-from plotly.subplots import make_subplots
-from IPython.display import display, HTML
-import json
+from pyspark.sql.functions import max as spark_max
+from pyspark.sql.functions import min as spark_min
+from pyspark.sql.functions import round as spark_round
+from pyspark.sql.functions import sum as spark_sum
 
 # Configuration
 dbutils.widgets.dropdown("environment", "dev", ["dev", "staging", "prod"], "📊 Environment")
