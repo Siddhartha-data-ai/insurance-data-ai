@@ -7,6 +7,15 @@ import pytest
 from decimal import Decimal
 from datetime import datetime
 
+# PySpark imports for integration tests
+try:
+    from pyspark.sql.functions import col, when, round as spark_round
+except ImportError:
+    # Mock for environments without PySpark
+    col = None
+    when = None
+    spark_round = None
+
 
 @pytest.mark.integration
 class TestInsuranceETLPipeline:
