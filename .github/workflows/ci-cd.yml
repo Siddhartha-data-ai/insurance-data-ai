@@ -226,7 +226,7 @@ jobs:
     name: Deploy to Dev Environment
     runs-on: ubuntu-latest
     needs: [validate-databricks-bundle, integration-tests, data-quality-tests]
-    if: github.ref == 'refs/heads/dev' || github.ref == 'refs/heads/main'
+    if: github.ref == 'refs/heads/dev'
     environment: development
     
     steps:
