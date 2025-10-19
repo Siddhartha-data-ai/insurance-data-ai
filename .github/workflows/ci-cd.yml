@@ -69,8 +69,25 @@ jobs:
         run: |
           mypy src/ --ignore-missing-imports
         continue-on-error: true
+
+  security-scan:
+    name: Security Scanning
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
       
-      - name: Run Bandit (security scanner)
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+      
+      - name: Install security tools
+        run: |
+          pip install bandit safety
+      
+      - name: Run Bandit (security linter)
         run: |
           bandit -r src/ -f json -o bandit-report.json || true
         continue-on-error: true
@@ -91,7 +108,7 @@ jobs:
   unit-tests:
     name: Unit Tests
     runs-on: ubuntu-latest
-    needs: lint-and-format
+    needs: [lint-and-format, security-scan]
     
     steps:
       - name: Checkout code
@@ -200,7 +217,7 @@ jobs:
   validate-databricks-bundle:
     name: Validate Databricks Bundle
     runs-on: ubuntu-latest
-    needs: [lint-and-format, unit-tests]
+    needs: [lint-and-format, security-scan, unit-tests]
     
     steps:
       - name: Checkout code
@@ -343,7 +360,7 @@ jobs:
   notify-success:
     name: Pipeline Success Notification
     runs-on: ubuntu-latest
-    needs: [lint-and-format, unit-tests, integration-tests, data-quality-tests]
+    needs: [lint-and-format, security-scan, unit-tests, integration-tests, data-quality-tests]
     if: always()
     
     steps:
