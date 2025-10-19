@@ -6,7 +6,7 @@ max-line-length = 120
 max-complexity = 15
 
 # Ignore specific errors/warnings
-ignore = E203,E501,W503,E402,F401
+ignore = E203,E501,W503,E402,F401,F541,W293
     
 # Exclude directories
 exclude =
@@ -21,6 +21,16 @@ exclude =
     .pytest_cache,
     .mypy_cache,
     notebooks/.ipynb_checkpoints
+
+# Per-file ignores for Databricks notebook files
+per-file-ignores =
+    src/analytics/*.py:F821
+    src/bronze/*.py:F821
+    src/pipelines/*.py:F821
+    src/gold/*.py:F821
+    src/ml/*.py:F821
+    src/chatbot/*.py:F821
+    src/transformations/*.py:F821
 
 # File patterns to check
 filename = *.py
