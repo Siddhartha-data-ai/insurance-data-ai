@@ -691,7 +691,7 @@ insurance-data-ai/
 │   ├── jobs/
 │   │   └── etl_orchestration.yml
 │   ├── pipelines/
-│   │   └── bronze_to_silver_dlt.yml
+│   │   └── bronze_to_silver_dlt_simplified.yml
 │   └── grants/
 │       └── security_grants.yml
 │
@@ -699,9 +699,11 @@ insurance-data-ai/
 ├── .flake8                                 # ✨ Linter config
 ├── pyproject.toml                          # ✨ Python config
 ├── README.md                               # This file
+├── VALIDATION_REPORT.md                    # ✨ README accuracy validation
 ├── PHASE_1_IMPLEMENTATION.md               # ✨ Phase 1 docs
 ├── PHASE_2_IMPLEMENTATION.md               # ✨ Phase 2 docs
-└── PHASE_3_IMPLEMENTATION.md               # ✨ Phase 3 docs
+├── PHASE_3_IMPLEMENTATION.md               # ✨ Phase 3 docs
+└── ... (30+ additional guide & documentation files)
 ```
 
 ---
